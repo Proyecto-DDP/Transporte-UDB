@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "59541224060",
+    "firebase_url": "https://transporteudb.firebaseio.com",
+    "project_id": "transporteudb",
+    "storage_bucket": "transporteudb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59541224060:android:c80d6f22b1f366364ea7f9",
+        "android_client_info": {
+          "package_name": "com.example.transporteudb_v04"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59541224060-jv3j6m4sqdaj8je5oed4r3uuudqv4nk9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBv3nGtK_D7ARQLW2WXXA47sUaDVuyeiCI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59541224060-jv3j6m4sqdaj8je5oed4r3uuudqv4nk9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
