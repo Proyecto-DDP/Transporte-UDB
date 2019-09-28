@@ -12,4 +12,6 @@
     <string name="contacto">INFORMACIÓN DE CONTACTO</string>
     <string name="in">Entradas</string>
     <string name="out">Salidas</string>
+    <string name="nombre">Nombre:</string>
+    <string name="telefono">Número de teléfono:</string>
 </resources>
