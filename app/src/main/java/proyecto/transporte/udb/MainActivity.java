@@ -22,10 +22,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, show_info.class);
         startActivity(intent);
     }
-    public  void showMapa(View view){
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
 
-    }
 
 }

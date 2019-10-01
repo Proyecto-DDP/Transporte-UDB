@@ -3,6 +3,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -75,4 +76,9 @@ public class show_info extends AppCompatActivity {
         valueAnimator.start();
     }
 
+    public  void showMapa(View view){
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+
+    }
 }
