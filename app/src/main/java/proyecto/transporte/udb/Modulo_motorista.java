@@ -1,4 +1,4 @@
-package com.example.transporteudb_v04;
+package proyecto.transporte.udb;
 
 import androidx.appcompat.app.AppCompatActivity;
 

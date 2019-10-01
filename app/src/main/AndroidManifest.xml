@@ -46,6 +46,8 @@
         <activity android:name=".show_info"
             android:parentActivityName=".MainActivity"
             ></activity>
+        <activity android:name=".Modulo_motorista"
+            ></activity>
     </application>
 
 </manifest>
