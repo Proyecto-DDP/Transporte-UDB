@@ -21,13 +21,6 @@
             android:src="@drawable/ic_exit"
             android:background="@color/colorPrimary"
             />
-        <ImageView
-            android:id="@+id/search_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_search"
-            android:paddingRight="16dp"/>
     </RelativeLayout>
 
 </androidx.appcompat.widget.Toolbar>
