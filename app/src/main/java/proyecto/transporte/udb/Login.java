@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity {
     }
 
 
-    public void Identify(String uID, final String uPASS){
+    public void Identify(final String uID, final String uPASS){
 
         referencia.child("Usuarios").child(uID).addListenerForSingleValueEvent(
                 new ValueEventListener () {
@@ -63,7 +63,7 @@ public class Login extends AppCompatActivity {
                                     ActividadMotorista();
                                     break;
                                 default:
-                                    break;
+                                        break;
                             }
                         }
                         else

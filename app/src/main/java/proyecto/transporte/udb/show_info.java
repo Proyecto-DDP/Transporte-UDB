@@ -1,9 +1,14 @@
 package proyecto.transporte.udb;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -12,6 +17,7 @@ import android.widget.ImageButton;
 
 public class show_info extends AppCompatActivity {
     int rotationAngle = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +46,7 @@ public class show_info extends AppCompatActivity {
                 }
             }
         });
+
     }
     //Animación para expandir
     public static void expand(final View v, int duration, int targetHeight) {
@@ -81,4 +88,5 @@ public class show_info extends AppCompatActivity {
         startActivity(intent);
 
     }
+
 }
