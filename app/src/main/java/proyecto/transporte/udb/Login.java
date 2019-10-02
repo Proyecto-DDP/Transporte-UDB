@@ -62,7 +62,7 @@ public class Login extends AppCompatActivity {
                                 case "Motorista":
                                     ActividadMotorista();
                                     break;
-                                    default:
+                                default:
                                         break;
                             }
                         }
