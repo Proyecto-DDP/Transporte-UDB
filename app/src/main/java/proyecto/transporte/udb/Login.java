@@ -24,6 +24,7 @@ public class Login extends AppCompatActivity {
 
     public String username;
     public String password;
+    public String tipo;
 
     private EditText Usuario;
     private EditText Password;
@@ -43,7 +44,7 @@ public class Login extends AppCompatActivity {
     }
 
 
-    public void Identify(String uID, final String uPASS){
+    public void Identify(final String uID, final String uPASS){
 
         referencia.child("Usuarios").child(uID).addListenerForSingleValueEvent(
                 new ValueEventListener () {
@@ -51,9 +52,19 @@ public class Login extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Lo ENCUENTRA
                         String TruePassword = dataSnapshot.child("Pass").getValue(String.class);
+                        tipo = dataSnapshot.child("Tipo").getValue(String.class);
                         if (uPASS.equals(TruePassword))
                         {
-                            ActividadSig();
+                            switch (tipo){
+                                case "Usuario":
+                                    ActividadSig();
+                                    break;
+                                case "Motorista":
+                                    ActividadMotorista();
+                                    break;
+                                    default:
+                                        break;
+                            }
                         }
                         else
                         {
@@ -101,6 +112,11 @@ public class Login extends AppCompatActivity {
     public void ActividadSig()
     {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void ActividadMotorista(){
+        Intent intent = new Intent(this, Modulo_motorista.class);
         startActivity(intent);
     }
 }
