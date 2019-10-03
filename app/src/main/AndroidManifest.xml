@@ -52,7 +52,10 @@
             ></activity>
         <activity android:name=".Modulo_motorista"
             ></activity>
-
+        <activity android:name=".mant_zona"
+            android:parentActivityName=".AdminActivity"
+            >
+        </activity>
         <service android:name=".GPS_Service"/>
 
     </application>
