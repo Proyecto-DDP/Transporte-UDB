@@ -56,6 +56,8 @@
             android:parentActivityName=".AdminActivity"
             >
         </activity>
+        <activity android:name=".mant_prop" android:parentActivityName=".AdminActivity"/>
+        <activity android:name=".mant_conduc" android:parentActivityName=".AdminActivity"/>
         <service android:name=".GPS_Service"/>
 
     </application>

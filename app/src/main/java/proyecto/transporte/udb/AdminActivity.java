@@ -22,4 +22,12 @@ public class AdminActivity extends AppCompatActivity {
         Intent intent = new Intent(this, mant_zona.class);
         startActivity(intent);
     }
+    public void mantProp(View view){
+        Intent intent = new Intent(this, mant_prop.class);
+        startActivity(intent);
+    }
+    public void mantCondtuc(View view){
+        Intent intent = new Intent(this, mant_conduc.class);
+        startActivity(intent);
+    }
 }

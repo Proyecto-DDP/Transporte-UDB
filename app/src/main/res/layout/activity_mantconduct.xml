@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,14 +22,15 @@
                 android:orientation="horizontal"
                 android:weightSum="1">
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/codCond"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.80"
-                    android:hint="Código de zona"
+                    android:hint="Código conductor"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:layout_width="0dp"
@@ -43,9 +43,10 @@
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nombreCond"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre de zona"
+                android:hint="Nombre de conductor"
                 android:layout_marginTop="8dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
