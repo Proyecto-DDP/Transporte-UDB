@@ -70,8 +70,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                latitud = dataSnapshot.child("Unidades").child("Unidad01").child("Latitud").getValue(Double.class);
-                longitud = dataSnapshot.child("Unidades").child("Unidad01").child("Longitud").getValue(Double.class);
+                latitud = dataSnapshot.child("Unidades").child("Unidad01").child("Ubicacion").child("Latitud").getValue(Double.class);
+                longitud = dataSnapshot.child("Unidades").child("Unidad01").child("Ubicacion").child("Longitud").getValue(Double.class);
                 userLocation = new LatLng(latitud,longitud);
 
                 usuario.setPosition(userLocation);
