@@ -17,18 +17,35 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="32dp">
+
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="300dp"
-                android:minWidth="250dp"
-                android:padding="8dp"
-                android:elevation="2dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:drawableLeft="@drawable/ic_account"
-                android:text="Mantenimiento Propietarios"
                 android:background="@color/colorPrimaryDark"
-                android:textColor="@color/White"
-                android:drawablePadding="8dp"/>
+                android:drawableLeft="@drawable/ic_zone"
+                android:drawablePadding="8dp"
+                android:elevation="2dp"
+                android:minWidth="250dp"
+                android:onClick="mantZona"
+                android:padding="8dp"
+                android:text="Mantenimiento Zonas"
+                android:textColor="@color/White" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorPrimaryDark"
+                android:drawableLeft="@drawable/ic_account"
+                android:drawablePadding="8dp"
+                android:elevation="2dp"
+                android:minWidth="250dp"
+                android:onClick="mantProp"
+                android:padding="8dp"
+                android:text="Mantenimiento Propietarios"
+                android:textColor="@color/White" />
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="300dp"
                 android:layout_marginTop="16dp"
@@ -37,37 +54,26 @@
                 android:elevation="2dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:drawableLeft="@drawable/ic_ruta"
-                android:text="Mantenimiento Rutas"
+                android:drawableLeft="@drawable/ic_time"
+                android:text="Mantenimiento Itinerarios"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/White"
                 android:drawablePadding="8dp"/>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="300dp"
-                android:layout_marginTop="16dp"
-                android:minWidth="250dp"
-                android:padding="8dp"
-                android:elevation="2dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:drawableLeft="@drawable/ic_account"
-                android:text="Mantenimiento Propietarios"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/White"
-                android:drawablePadding="8dp"/>
-            <androidx.appcompat.widget.AppCompatButton
                 android:layout_marginTop="16dp"
-                android:layout_width="300dp"
-                android:minWidth="250dp"
-                android:padding="8dp"
-                android:elevation="2dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:drawableLeft="@drawable/ic_account"
-                android:text="Mantenimiento Propietarios"
                 android:background="@color/colorPrimaryDark"
-                android:textColor="@color/White"
-                android:drawablePadding="8dp"/>
+                android:drawableLeft="@drawable/ic_owner"
+                android:drawablePadding="8dp"
+                android:elevation="2dp"
+                android:minWidth="250dp"
+                android:onClick="mantCondtuc"
+                android:padding="8dp"
+                android:text="Mantenimiento Conductores"
+                android:textColor="@color/White" />
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_marginTop="16dp"
                 android:layout_width="300dp"
@@ -76,8 +82,22 @@
                 android:elevation="2dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:drawableLeft="@drawable/ic_account"
-                android:text="Mantenimiento Propietarios"
+                android:drawableLeft="@drawable/ic_busw"
+                android:text="Mantenimiento Unidades"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/White"
+                android:drawablePadding="8dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="16dp"
+                android:layout_width="300dp"
+                android:minWidth="250dp"
+                android:padding="8dp"
+                android:elevation="2dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:drawableLeft="@drawable/ic_book"
+                android:text="Mantenimiento Usuarios"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/White"
                 android:drawablePadding="8dp"/>
