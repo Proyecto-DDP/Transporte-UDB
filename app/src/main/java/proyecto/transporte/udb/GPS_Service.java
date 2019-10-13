@@ -45,8 +45,8 @@ public class GPS_Service extends Service {
         listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                reference.child("Unidades").child("Unidad01").child("Latitud").setValue(location.getLatitude());
-                reference.child("Unidades").child("Unidad01").child("Longitud").setValue(location.getLongitude());
+                reference.child("Unidades").child("Unidad01").child("Ubicacion").child("Latitud").setValue(location.getLatitude());
+                reference.child("Unidades").child("Unidad01").child("Ubicacion").child("Longitud").setValue(location.getLongitude());
             }
 
             @Override
