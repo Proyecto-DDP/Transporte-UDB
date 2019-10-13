@@ -62,6 +62,8 @@ public class Login extends AppCompatActivity {
                                 case "Motorista":
                                     ActividadMotorista();
                                     break;
+                                case "Administrador":
+                                    ActividadAdministrador();
                                 default:
                                         break;
                             }
@@ -117,6 +119,11 @@ public class Login extends AppCompatActivity {
 
     public void ActividadMotorista(){
         Intent intent = new Intent(this, Modulo_motorista.class);
+        startActivity(intent);
+    }
+
+    public void ActividadAdministrador(){
+        Intent intent = new Intent(this, AdminActivity.class);
         startActivity(intent);
     }
 }
