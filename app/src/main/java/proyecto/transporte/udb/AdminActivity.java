@@ -5,6 +5,9 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+
 public class AdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,6 +17,9 @@ public class AdminActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
+
     }
 
     public void mantZona(View view){
@@ -28,4 +34,5 @@ public class AdminActivity extends AppCompatActivity {
         Intent intent = new Intent(this, mant_conduc.class);
         startActivity(intent);
     }
+
 }

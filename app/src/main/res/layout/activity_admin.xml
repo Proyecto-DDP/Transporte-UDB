@@ -34,20 +34,6 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:background="@color/colorPrimaryDark"
-                android:drawableLeft="@drawable/ic_account"
-                android:drawablePadding="8dp"
-                android:elevation="2dp"
-                android:minWidth="250dp"
-                android:onClick="mantProp"
-                android:padding="8dp"
-                android:text="Mantenimiento Propietarios"
-                android:textColor="@color/White" />
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="300dp"
                 android:layout_marginTop="16dp"
                 android:minWidth="250dp"
                 android:padding="8dp"
@@ -60,20 +46,6 @@
                 android:textColor="@color/White"
                 android:drawablePadding="8dp"/>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:background="@color/colorPrimaryDark"
-                android:drawableLeft="@drawable/ic_owner"
-                android:drawablePadding="8dp"
-                android:elevation="2dp"
-                android:minWidth="250dp"
-                android:onClick="mantCondtuc"
-                android:padding="8dp"
-                android:text="Mantenimiento Conductores"
-                android:textColor="@color/White" />
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_marginTop="16dp"
                 android:layout_width="300dp"

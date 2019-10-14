@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addRoute(){
-        Log.d("DEBUG","Hola");
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         for (int i = 0; i < routes.length; i++){
             itemModel itemModel = new itemModel();
