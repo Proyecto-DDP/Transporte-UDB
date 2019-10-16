@@ -37,6 +37,7 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"/>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".mant_itinerario"/>
         <activity android:name=".AdminActivity">
 
         </activity>
@@ -52,7 +53,12 @@
             ></activity>
         <activity android:name=".Modulo_motorista"
             ></activity>
-
+        <activity android:name=".mant_zona"
+            android:parentActivityName=".AdminActivity"
+            >
+        </activity>
+        <activity android:name=".mant_prop" android:parentActivityName=".AdminActivity"/>
+        <activity android:name=".mant_conduc" android:parentActivityName=".AdminActivity"/>
         <service android:name=".GPS_Service"/>
 
     </application>

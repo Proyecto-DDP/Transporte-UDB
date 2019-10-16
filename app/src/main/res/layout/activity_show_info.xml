@@ -177,45 +177,13 @@
             android:scrollbars="none">
 
             <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cgIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:chipSpacing="8dp">
 
-                <com.google.android.material.chip.Chip
-                    style="@style/ChipCustomStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="8:00am"
-                    android:textColor="@color/colorPrimary" />
 
-                <com.google.android.material.chip.Chip
-                    style="@style/ChipCustomStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10:00am"
-                    android:textColor="@color/colorPrimary" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/ChipCustomStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="12:00pm"
-                    android:textColor="@color/colorPrimary" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/ChipCustomStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3:30pm"
-                    android:textColor="@color/colorPrimary" />
-
-                <com.google.android.material.chip.Chip
-                    style="@style/ChipCustomStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5:30pm"
-                    android:textColor="@color/colorPrimary" />
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
 
@@ -245,6 +213,7 @@
             android:scrollbars="none"
             >
             <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cgOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipSpacing="8dp"

@@ -2,7 +2,11 @@ package proyecto.transporte.udb;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 public class AdminActivity extends AppCompatActivity {
     @Override
@@ -13,6 +17,14 @@ public class AdminActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
+
+    }
+
+    public void mantZona(View view){
+        Intent intent = new Intent(this, mant_zona.class);
+        startActivity(intent);
     }
 
 }
