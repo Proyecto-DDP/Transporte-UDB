@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<itemModel> arrayList;
-    int icons[] = {R.drawable.ic_bus,R.drawable.ic_delete,R.drawable.ic_search};
+    int icons[] = {R.drawable.ic_bus,R.drawable.ic_delete,R.drawable.ic_search,R.drawable.ic_search};
     String routes[] = {"Santa Tecla - UDB", "Zacamil - UDB","Prueba - UDB", "Casa de Ricardo - Soyacity (Dogor)"};
 
     @Override
