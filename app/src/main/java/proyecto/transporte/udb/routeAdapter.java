@@ -60,6 +60,7 @@ public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> 
             switch (view.getId()){
                 case R.id.ver_info:
                     Intent intent = new Intent(view.getContext(), show_info.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     view.getContext().startActivity(intent);
                     break;
             }
