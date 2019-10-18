@@ -29,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ArrayList<itemModel> arrayList;
-    int icons[] = {R.drawable.ic_bus,R.drawable.ic_delete,R.drawable.ic_search,R.drawable.ic_search};
-    String routes[] = new String[10];
+    private int icons[] = {R.drawable.ic_bus,R.drawable.ic_delete,R.drawable.ic_search,R.drawable.ic_search};
+    private String routes[];
+    private int cantidadRutas=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         addRoute();
 
+
     }
     public void showInfo(View view){
         Intent intent = new Intent(view.getContext(), show_info.class);
@@ -56,29 +58,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addRoute(){
-        obtenerRutas();
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-        for (int i = 0; i < routes.length; i++){
-            itemModel itemModel = new itemModel();
-            itemModel.setImage(icons[i]);
-            itemModel.setRouteN(routes[i]);
-            arrayList.add(itemModel);
-        }
-        routeAdapter adapter = new routeAdapter(getApplicationContext(), arrayList);
-        recyclerView.setAdapter(adapter);
-    }
-
-    private void obtenerRutas() {
         unidades.addValueEventListener(new ValueEventListener() {
-            int i=0;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                cantidadRutas = 0;
+                for(DataSnapshot conteo: dataSnapshot.getChildren()){
+                    cantidadRutas++;
+                }
+                routes = new String[cantidadRutas];
+                int i=0;
                 for(DataSnapshot placas : dataSnapshot.getChildren()){
                     unidadT = placas.getKey();
-                    routes[i] = dataSnapshot.child(unidadT).child("Zona").getValue(String.class);
-                    routes[i] += " - "+unidadT;
+                    routes[i] = dataSnapshot.child(unidadT).child("Zona").getValue(String.class) + " - "+unidadT;
+                    Log.d("Rutas encontradas",routes[i].toString());
+                    Log.d("Iconos", Integer.toString(icons[i]));
                     i++;
                 }
+                //No entiendo por que pero solo en este orden funciono
+                for (int j = 0; j < routes.length; j++){
+                    itemModel itemModel = new itemModel();
+                    itemModel.setImage(icons[j]);
+                    itemModel.setRouteN(routes[j]);
+                    arrayList.add(itemModel);
+                }
+                routeAdapter adapter = new routeAdapter(getApplicationContext(), arrayList);
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
@@ -86,5 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
+
 }
