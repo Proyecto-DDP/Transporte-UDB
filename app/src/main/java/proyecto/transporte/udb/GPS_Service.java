@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +28,8 @@ public class GPS_Service extends Service {
     }
 
     private FirebaseDatabase database;
-    private DatabaseReference reference;
+    private DatabaseReference unidades;
+    private DatabaseReference usuarios;
 
     private LocationListener listener;
     private LocationManager locationManager;
@@ -35,18 +37,37 @@ public class GPS_Service extends Service {
     private Double longitud;
     private Double latitud;
 
+    private String motorista;
+    private String placa;
+
     @SuppressLint("MissingPermission")
     @Override
     public void onCreate() {
         super.onCreate();
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference();
+        unidades = database.getReference("Unidades");
+        usuarios = database.getReference("Usuarios");
+
+        Login login = new Login();
+        motorista = login.usuarioMotorista;
+
+        usuarios.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                placa = dataSnapshot.child(motorista).child("Unidad").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                reference.child("Unidades").child("Unidad01").child("Ubicacion").child("Latitud").setValue(location.getLatitude());
-                reference.child("Unidades").child("Unidad01").child("Ubicacion").child("Longitud").setValue(location.getLongitude());
+                unidades.child(placa).child("Ubicacion").child("Latitud").setValue(location.getLatitude());
+                unidades.child(placa).child("Ubicacion").child("Longitud").setValue(location.getLongitude());
             }
 
             @Override
@@ -61,7 +82,9 @@ public class GPS_Service extends Service {
 
             @Override
             public void onProviderDisabled(String provider) {
-
+                Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
             }
         };
 
@@ -69,10 +92,12 @@ public class GPS_Service extends Service {
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000,0,listener);
     }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         if(locationManager != null)
             locationManager.removeUpdates(listener);
     }
+
 }

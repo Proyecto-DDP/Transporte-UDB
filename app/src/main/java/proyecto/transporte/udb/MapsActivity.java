@@ -24,11 +24,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
 
     private FirebaseDatabase database;
-    private DatabaseReference reference;
+    private DatabaseReference unidades;
+    private  DatabaseReference usuarios;
 
     private Double latitud, longitud;
     private LatLng userLocation;
     private Marker usuario;
+
+    //*********************ESTA INFO LA DEBO DE TOMAR DE FIREBASE Y EL BOTON ES QUIEN ME LA PASA********************//
+    private String motorista;
+    private String placa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +45,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference();
+        unidades = database.getReference("Unidades");
+        usuarios = database.getReference("Usuarios");
     }
 
 
@@ -56,22 +62,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         LatLng sydney = new LatLng(-34, 151);
-
         usuario = mMap.addMarker(new MarkerOptions()
                 .position(sydney)
                 .title("Mi ubicacion")
         );
+        Login login = new Login();
+        motorista = login.usuarioMotorista;
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        reference.addValueEventListener(new ValueEventListener() {
+        usuarios.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                latitud = dataSnapshot.child("Unidades").child("Unidad01").child("Ubicacion").child("Latitud").getValue(Double.class);
-                longitud = dataSnapshot.child("Unidades").child("Unidad01").child("Ubicacion").child("Longitud").getValue(Double.class);
+                placa = dataSnapshot.child(motorista).child("Unidad").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        unidades.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                latitud = dataSnapshot.child(placa).child("Ubicacion").child("Latitud").getValue(Double.class);
+                longitud = dataSnapshot.child(placa).child("Ubicacion").child("Longitud").getValue(Double.class);
                 userLocation = new LatLng(latitud,longitud);
 
                 usuario.setPosition(userLocation);
