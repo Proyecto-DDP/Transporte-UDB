@@ -29,13 +29,14 @@
             android:layout_marginTop="8dp">
 
             <TextView
+                android:id="@+id/txtRuta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/ruta"
                 android:textColor="@color/black"
-                android:layout_alignParentStart="true"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 

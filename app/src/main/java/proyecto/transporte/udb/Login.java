@@ -1,6 +1,5 @@
 package proyecto.transporte.udb;
 
-import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -97,7 +96,7 @@ public class Login extends AppCompatActivity {
         // startActivity(intent);
 
       username = Usuario.getText().toString();
-      enviarValor();
+      actualizarValor();
       password = Password.getText().toString();
       //  CrearDialogo(username, password);
 
@@ -135,7 +134,7 @@ public class Login extends AppCompatActivity {
     }
 
     //Sirve para enviar el usuario al GPS_Service
-    void enviarValor(){
+    void actualizarValor(){
         usuarioMotorista = username;
     }
 }

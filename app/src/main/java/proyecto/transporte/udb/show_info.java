@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -19,10 +20,17 @@ import com.google.android.material.chip.ChipGroup;
 public class show_info extends AppCompatActivity {
     int rotationAngle = 0;
     ChipGroup chipGroup1, chipGroup2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_info);
+
+        Bundle extras = getIntent().getExtras();
+        TextView ruta = (TextView) findViewById(R.id.txtRuta);
+        ruta.setText(extras.getString("RUTA"));
+
         //Flecha para regresar
         Toolbar toolbar = findViewById(R.id.toolbar_back);
         setSupportActionBar(toolbar);
