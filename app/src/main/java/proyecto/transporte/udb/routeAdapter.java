@@ -3,6 +3,7 @@ package proyecto.transporte.udb;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import android.content.Context;
 public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> {
     Context context;
     ArrayList<itemModel> arrayList;
+    String [] provisional;
+    String placa;
 
     public routeAdapter(Context context, ArrayList<itemModel> arrayList){
         this.context = context;
@@ -61,6 +64,7 @@ public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> 
                 case R.id.ver_info:
                     Intent intent = new Intent(view.getContext(), show_info.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("RUTA",routeName.getText());
                     view.getContext().startActivity(intent);
                     break;
             }

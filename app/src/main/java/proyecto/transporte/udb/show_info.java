@@ -1,5 +1,6 @@
 package proyecto.transporte.udb;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -12,17 +13,51 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.firebase.database.FirebaseDatabase;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class show_info extends AppCompatActivity {
     int rotationAngle = 0;
     ChipGroup chipGroup1, chipGroup2;
+
+    private FirebaseDatabase database;
+    private DatabaseReference unidades;
+    private String [] provicional;
+    public static String placa;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_info);
+
+        database = FirebaseDatabase.getInstance();
+        unidades = database.getReference("Unidades");
+
+        //Referencia de objetos del layout
+        final TextView ruta = (TextView) findViewById(R.id.txtRuta);
+        final ImageView imagenUnidad = (ImageView) findViewById(R.id.imagenUnidad);
+        final TextView txtNombreMotorista = (TextView) findViewById(R.id.txtNombreMotorista);
+        final TextView txtTelefonoMotorista = (TextView) findViewById(R.id.txtTelefonoMotorista);
+
+        //obteniendo placa
+        Bundle extras = getIntent().getExtras();
+        provicional = extras.getString("RUTA").split(" - ");
+        placa = provicional[1];
+
+        ruta.setText(extras.getString("RUTA"));
+
         //Flecha para regresar
         Toolbar toolbar = findViewById(R.id.toolbar_back);
         setSupportActionBar(toolbar);
@@ -59,6 +94,22 @@ public class show_info extends AppCompatActivity {
             chip.setText(entrada);
             chipGroup1.addView(chip);
         }
+
+        //Llenado de los elementos del layout
+        unidades.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                txtNombreMotorista.setText(dataSnapshot.child(placa).child("Motorista").child("Nombre").getValue(String.class));
+                txtTelefonoMotorista.setText(dataSnapshot.child(placa).child("Motorista").child("Telefono").getValue(String.class));
+                Picasso.get().load(dataSnapshot.child(placa).child("Foto").getValue(String.class)).into(imagenUnidad);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
     //Animación para expandir
     public static void expand(final View v, int duration, int targetHeight) {
