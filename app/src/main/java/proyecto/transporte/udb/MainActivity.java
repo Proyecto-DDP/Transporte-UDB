@@ -71,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 for(DataSnapshot placas : dataSnapshot.getChildren()){
                     unidadT = placas.getKey();
                     routes[i] = dataSnapshot.child(unidadT).child("Zona").getValue(String.class) + " - "+unidadT;
-                    Log.d("Rutas encontradas",routes[i].toString());
-                    Log.d("Iconos", Integer.toString(icons[i]));
                     i++;
                 }
                 //No entiendo por que pero solo en este orden funciono

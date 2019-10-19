@@ -10,6 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -40,12 +41,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
 
         //Encontrar la placa
-        //Bundle extras = getIntent().getExtras();
-       // provicional = extras.getString("RUTA").split(" - ");
         show_info provi= new show_info();
         placa = provi.placa;
         Log.d("PLACA",placa);
-       //placa = provicional[1];
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
@@ -76,29 +74,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         usuario = mMap.addMarker(new MarkerOptions()
                 .position(sydney)
                 .title("Mi ubicacion")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.busicono))
         );
-        Login login = new Login();
-        motorista = login.usuarioMotorista;
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15))
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        /*usuarios.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                placa = dataSnapshot.child(motorista).child("Unidad").getValue(String.class);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
         unidades.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                latitud = dataSnapshot.child("P474100").child("Ubicacion").child("Latitud").getValue(Double.class);
-                longitud = dataSnapshot.child("P474100").child("Ubicacion").child("Longitud").getValue(Double.class);
+                latitud = dataSnapshot.child(placa).child("Ubicacion").child("Latitud").getValue(Double.class);
+                longitud = dataSnapshot.child(placa).child("Ubicacion").child("Longitud").getValue(Double.class);
+                Log.d("LONGITUD",longitud.toString());
                 userLocation = new LatLng(latitud,longitud);
 
                 usuario.setPosition(userLocation);
