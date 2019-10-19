@@ -77,7 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.busicono))
         );
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
 
