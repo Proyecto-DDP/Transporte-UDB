@@ -10,6 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -24,14 +25,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
 
     private FirebaseDatabase database;
-    private DatabaseReference reference;
+    private DatabaseReference unidades;
+    private  DatabaseReference usuarios;
 
     private Double latitud, longitud;
     private LatLng userLocation;
     private Marker usuario;
 
+    //*********************ESTA INFO LA DEBO DE TOMAR DE FIREBASE Y EL BOTON ES QUIEN ME LA PASA********************//
+    private String motorista;
+    private String placa;
+    private String [] provicional;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Encontrar la placa
+        show_info provi= new show_info();
+        placa = provi.placa;
+        Log.d("PLACA",placa);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -40,7 +53,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference();
+        unidades = database.getReference("Unidades");
+        usuarios = database.getReference("Usuarios");
     }
 
 
@@ -56,22 +70,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         LatLng sydney = new LatLng(-34, 151);
-
         usuario = mMap.addMarker(new MarkerOptions()
                 .position(sydney)
                 .title("Mi ubicacion")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.busicono))
         );
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        reference.addValueEventListener(new ValueEventListener() {
+
+        unidades.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                latitud = dataSnapshot.child("Unidades").child("Unidad01").child("Ubicacion").child("Latitud").getValue(Double.class);
-                longitud = dataSnapshot.child("Unidades").child("Unidad01").child("Ubicacion").child("Longitud").getValue(Double.class);
+                latitud = dataSnapshot.child(placa).child("Ubicacion").child("Latitud").getValue(Double.class);
+                longitud = dataSnapshot.child(placa).child("Ubicacion").child("Longitud").getValue(Double.class);
+                Log.d("LONGITUD",longitud.toString());
                 userLocation = new LatLng(latitud,longitud);
 
                 usuario.setPosition(userLocation);
