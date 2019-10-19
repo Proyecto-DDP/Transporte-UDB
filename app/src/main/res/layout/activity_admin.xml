@@ -34,31 +34,33 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="300dp"
-                android:layout_marginTop="16dp"
-                android:minWidth="250dp"
-                android:padding="8dp"
-                android:elevation="2dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:drawableLeft="@drawable/ic_time"
-                android:text="Mantenimiento Itinerarios"
+                android:layout_marginTop="16dp"
                 android:background="@color/colorPrimaryDark"
-                android:textColor="@color/White"
-                android:drawablePadding="8dp"/>
+                android:drawableLeft="@drawable/ic_time"
+                android:drawablePadding="8dp"
+                android:elevation="2dp"
+                android:minWidth="250dp"
+                android:onClick="mantItinerario"
+                android:padding="8dp"
+                android:text="Mantenimiento Itinerarios"
+                android:textColor="@color/White" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_marginTop="16dp"
                 android:layout_width="300dp"
-                android:minWidth="250dp"
-                android:padding="8dp"
-                android:elevation="2dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:drawableLeft="@drawable/ic_busw"
-                android:text="Mantenimiento Unidades"
+                android:layout_marginTop="16dp"
                 android:background="@color/colorPrimaryDark"
-                android:textColor="@color/White"
-                android:drawablePadding="8dp"/>
+                android:drawableLeft="@drawable/ic_busw"
+                android:drawablePadding="8dp"
+                android:elevation="2dp"
+                android:minWidth="250dp"
+                android:onClick="mantUnidades"
+                android:padding="8dp"
+                android:text="Mantenimiento Unidades"
+                android:textColor="@color/White" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_marginTop="16dp"
