@@ -15,6 +15,7 @@
             layout="@layout/toolbar_back" />
 
         <ImageView
+            android:id="@+id/imagenUnidad"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:elevation="3dp"
@@ -118,12 +119,14 @@
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:layout_alignParentStart="true"/>
+
                     <TextView
+                        android:id="@+id/txtNombreMotorista"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nombre de prueba"
+                        android:layout_alignParentEnd="true"
                         android:layout_marginEnd="16dp"
-                        android:layout_alignParentEnd="true"/>
+                        android:text="Nombre de prueba" />
                 </RelativeLayout>
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -137,12 +140,14 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_alignParentStart="true"/>
+
                 <TextView
+                    android:id="@+id/txtTelefonoMotorista"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7159-9868"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginEnd="16dp"
-                    android:layout_alignParentEnd="true"/>
+                    android:text="7159-9868" />
             </RelativeLayout>
 
         </LinearLayout>

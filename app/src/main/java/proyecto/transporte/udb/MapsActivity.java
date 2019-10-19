@@ -34,9 +34,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //*********************ESTA INFO LA DEBO DE TOMAR DE FIREBASE Y EL BOTON ES QUIEN ME LA PASA********************//
     private String motorista;
     private String placa;
+    private String [] provicional;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Encontrar la placa
+        //Bundle extras = getIntent().getExtras();
+       // provicional = extras.getString("RUTA").split(" - ");
+        show_info provi= new show_info();
+        placa = provi.placa;
+        Log.d("PLACA",placa);
+       //placa = provicional[1];
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -73,7 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        usuarios.addValueEventListener(new ValueEventListener() {
+        /*usuarios.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 placa = dataSnapshot.child(motorista).child("Unidad").getValue(String.class);
@@ -83,12 +93,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
         unidades.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                latitud = dataSnapshot.child(placa).child("Ubicacion").child("Latitud").getValue(Double.class);
-                longitud = dataSnapshot.child(placa).child("Ubicacion").child("Longitud").getValue(Double.class);
+                latitud = dataSnapshot.child("P474100").child("Ubicacion").child("Latitud").getValue(Double.class);
+                longitud = dataSnapshot.child("P474100").child("Ubicacion").child("Longitud").getValue(Double.class);
                 userLocation = new LatLng(latitud,longitud);
 
                 usuario.setPosition(userLocation);

@@ -36,12 +36,6 @@ public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> 
     public void onBindViewHolder(routeAdapter.viewHolder viewHolder, int position){
         viewHolder.routeName.setText(arrayList.get(position).getRouteN());
         viewHolder.routeImg.setImageResource(arrayList.get(position).getImage());
-
-        //Obteniendo placas
-        provisional = arrayList.get(position).getRouteN().split(" - ");
-        placa = provisional[1];
-        Log.d("PLACA",placa);
-
     }
 
     @Override

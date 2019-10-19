@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ArrayList<itemModel> arrayList;
-    private int icons[] = {R.drawable.ic_bus,R.drawable.ic_delete,R.drawable.ic_search,R.drawable.ic_search};
+    private int icons[] = {R.drawable.ic_bus,R.drawable.ic_bus,R.drawable.ic_bus,R.drawable.ic_bus};
     private String routes[];
     private int cantidadRutas=0;
 
