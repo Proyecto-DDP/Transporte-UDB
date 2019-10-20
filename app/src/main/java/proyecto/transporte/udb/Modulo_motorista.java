@@ -1,16 +1,20 @@
 package proyecto.transporte.udb;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import proyecto.transporte.udb.keepLogin.PreferenceUtils;
 
 public class Modulo_motorista extends AppCompatActivity {
 
@@ -74,5 +78,36 @@ public class Modulo_motorista extends AppCompatActivity {
                 runtime_permissions();
             }
         }
+    }
+
+    //***Salir***
+
+    public void onBackPressed()
+    {
+        CreateDialog();
+    }
+
+    private void CreateDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("¿Desea cerrar la sesión?");
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                PreferenceUtils.Clear(Modulo_motorista.this);
+                FinalizarTransmision(finalizar);
+                Modulo_motorista.super.onBackPressed();
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        builder.create().show();
     }
 }
