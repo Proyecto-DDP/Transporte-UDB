@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import proyecto.transporte.udb.keepLogin.PreferenceUtils;
+
 
 public class Login extends AppCompatActivity {
 
@@ -44,6 +46,24 @@ public class Login extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         referencia = database.getReference();
 
+        //Prueba mantener sesion
+        if (PreferenceUtils.getUser(this) != null ) /*Revisar que esté almacenado*/
+        {//Identify(PreferenceUtils.getUser(this), PreferenceUtils.getPassword(this)); //<---- Método inicial
+            tipo = PreferenceUtils.getType(this);
+            //Redireccionar según tipo
+            switch (tipo){
+                case "Usuario":
+                    ActividadSig();
+                    break;
+                case "Motorista":
+                    ActividadMotorista();
+                    break;
+                case "Administrador":
+                    ActividadAdministrador();
+                default:
+                    break;
+            }
+        }
     }
 
 
@@ -58,6 +78,12 @@ public class Login extends AppCompatActivity {
                         tipo = dataSnapshot.child("Tipo").getValue(String.class);
                         if (uPASS.equals(TruePassword))
                         {
+                            //Almacenar datos de sesion
+                            PreferenceUtils.saveUser(uID, Login.this);
+                            PreferenceUtils.savePassword(TruePassword, Login.this);
+                            PreferenceUtils.saveType(tipo, Login.this); //<----- Probar si no sirve
+
+                            //Revisar tipo
                             switch (tipo){
                                 case "Usuario":
                                     ActividadSig();
@@ -70,6 +96,11 @@ public class Login extends AppCompatActivity {
                                 default:
                                         break;
                             }
+
+                            //Limpiar campos
+                            Usuario.setText("");
+                            Password.setText("");
+                            Password.clearFocus();
                         }
                         else
                         {
@@ -85,9 +116,6 @@ public class Login extends AppCompatActivity {
                     }
                 });
     }
-
-
-
 
     //En respuesta al botón
     public void nextActivity(View view) {

@@ -8,6 +8,7 @@ import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -34,6 +35,7 @@ public class show_info extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference unidades;
     private String [] provicional;
+    private String entradasProvicional, salidasProvicional;
     public static String placa;
 
 
@@ -83,18 +85,6 @@ public class show_info extends AppCompatActivity {
             }
         });
 
-
-        //Creación de los chips
-        LayoutInflater inflater = LayoutInflater.from(show_info.this);
-        chipGroup1 = (ChipGroup) findViewById(R.id.cgIn);
-        chipGroup2 = (ChipGroup) findViewById(R.id.cgOut);
-        String[] entradas = new String[]{"08:00am"};
-        for (String entrada : entradas){
-            Chip chip = (Chip)inflater.inflate(R.layout.added_chip, null, false);
-            chip.setText(entrada);
-            chipGroup1.addView(chip);
-        }
-
         //Llenado de los elementos del layout
         unidades.addValueEventListener(new ValueEventListener() {
             @Override
@@ -102,7 +92,9 @@ public class show_info extends AppCompatActivity {
                 txtNombreMotorista.setText(dataSnapshot.child(placa).child("Motorista").child("Nombre").getValue(String.class));
                 txtTelefonoMotorista.setText(dataSnapshot.child(placa).child("Motorista").child("Telefono").getValue(String.class));
                 Picasso.get().load(dataSnapshot.child(placa).child("Foto").getValue(String.class)).into(imagenUnidad);
-
+                entradasProvicional = dataSnapshot.child(placa).child("Itinerario").child("Entrada").getValue(String.class);
+                salidasProvicional = dataSnapshot.child(placa).child("Itinerario").child("Salida").getValue(String.class);
+                llenadoItinerario(entradasProvicional,salidasProvicional);
             }
 
             @Override
@@ -110,6 +102,26 @@ public class show_info extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    //Creación de los chips (Llenado de las rutas)
+    public void llenadoItinerario(String entradasProv, String salidasProv){
+        LayoutInflater inflater = LayoutInflater.from(show_info.this);
+        chipGroup1 = (ChipGroup) findViewById(R.id.cgIn);
+        chipGroup2 = (ChipGroup) findViewById(R.id.cgOut);
+        String[] entradas = entradasProv.split("/");
+        String[] salidas = salidasProv.split("/");
+        for (String entrada : entradas){
+            Chip chip = (Chip)inflater.inflate(R.layout.added_chip, null, false);
+            chip.setText(entrada);
+            chipGroup1.addView(chip);
+        }
+        for (String salida : salidas){
+            Chip chip = (Chip)inflater.inflate(R.layout.added_chip, null, false);
+            chip.setText(salida);
+            chipGroup2.addView(chip);
+        }
     }
     //Animación para expandir
     public static void expand(final View v, int duration, int targetHeight) {
@@ -151,5 +163,4 @@ public class show_info extends AppCompatActivity {
         startActivity(intent);
 
     }
-
 }
