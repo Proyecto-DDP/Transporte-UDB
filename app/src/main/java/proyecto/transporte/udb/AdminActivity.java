@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 
 import proyecto.transporte.udb.keepLogin.PreferenceUtils;
 
@@ -22,7 +23,13 @@ public class AdminActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
+        ImageButton imageButton = (ImageButton) findViewById(R.id.closed_session);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CreateDialog();
+            }
+        });
     }
 
     public void mantZona(View view){
