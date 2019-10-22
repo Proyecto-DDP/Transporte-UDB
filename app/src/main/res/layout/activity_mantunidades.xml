@@ -89,117 +89,50 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="8dp"
+                android:hint="Itinerarios registrados">
 
-                <TextView
+                <AutoCompleteTextView
+                    android:id="@+id/itinerario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/in"
-                    android:textColor="@color/black"
-                    android:paddingStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:textStyle="bold"
                     />
 
-            </LinearLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp">
 
-            <HorizontalScrollView
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/addZ"
+                android:background="@drawable/roundcorner"
+                android:layout_width="wrap_content"
+                android:padding="8dp"
+                android:drawablePadding="4dp"
                 android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:scrollbars="none">
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/cgIn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:chipSpacing="8dp">
-
-
-                </com.google.android.material.chip.ChipGroup>
-            </HorizontalScrollView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+                android:drawableLeft="@drawable/ic_add"
+                android:textColor="@color/White"
+                android:text="Agregar"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:background="@drawable/roundcorner"
+                android:id="@+id/delZ"
+                android:padding="8dp"
+                android:drawablePadding="4dp"
+                android:textColor="@color/White"
+                android:layout_marginStart="16dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="8dp">
+                android:drawableLeft="@drawable/ic_delete"
+                android:text="Eliminar"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/out"
-                    android:textColor="@color/black"
-                    android:paddingStart="8dp"
-                    android:textStyle="bold"
-                    />
-
-            </LinearLayout>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:scrollbars="none"
-                >
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/cgOut"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:chipSpacing="8dp"
-                    android:layout_marginTop="8dp"
-                    >
-
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-                        android:text="8:00am"
-                        style="@style/ChipCustomStyle"/>
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-                        android:text="10:00am"
-                        style="@style/ChipCustomStyle"/>
-                </com.google.android.material.chip.ChipGroup>
-            </HorizontalScrollView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/addU"
-                    android:background="@drawable/roundcorner"
-                    android:layout_width="wrap_content"
-                    android:padding="8dp"
-                    android:drawablePadding="4dp"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_add"
-                    android:textColor="@color/White"
-                    android:text="Agregar"/>
-                <androidx.appcompat.widget.AppCompatButton
-                    android:background="@drawable/roundcorner"
-                    android:id="@+id/delZ"
-                    android:padding="8dp"
-                    android:drawablePadding="4dp"
-                    android:textColor="@color/White"
-                    android:layout_marginStart="16dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_delete"
-                    android:text="Eliminar"/>
-
-            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
