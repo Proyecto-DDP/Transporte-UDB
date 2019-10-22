@@ -34,8 +34,6 @@ public class Login extends AppCompatActivity {
     private EditText Password;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

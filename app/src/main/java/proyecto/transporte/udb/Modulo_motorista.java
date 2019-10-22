@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import proyecto.transporte.udb.keepLogin.PreferenceUtils;
 
@@ -35,6 +36,13 @@ public class Modulo_motorista extends AppCompatActivity {
             enable_buttons();
         }
 
+        ImageButton imageButton = (ImageButton) findViewById(R.id.closed_session);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CreateDialog();
+            }
+        });
     }
 
     public void enable_buttons() {

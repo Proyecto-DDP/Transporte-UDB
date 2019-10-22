@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -54,7 +55,13 @@ public class MainActivity extends AppCompatActivity {
 
         addRoute();
 
-
+        ImageButton imageButton = (ImageButton) findViewById(R.id.closed_session);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CreateDialog();
+            }
+        });
     }
     public void showInfo(View view){
         Intent intent = new Intent(view.getContext(), show_info.class);
