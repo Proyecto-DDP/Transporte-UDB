@@ -37,39 +37,6 @@ public class mant_unidades extends AppCompatActivity {
             chip.setText(entrada);
             chipGroup1.addView(chip);
         }
-
-        obtChips();
     }
 
-    public void obtChips(){
-        Button insertB = findViewById(R.id.addU);
-        insertB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ChipGroup chgIn = findViewById(R.id.cgIn);
-                ChipGroup chgOut = findViewById(R.id.cgOut);
-
-                int countIn, countOut;
-                countIn = chgIn.getChildCount();
-                countOut = chgOut.getChildCount();
-
-                if (countIn != 0 || countOut != 0){
-                    int i = 0;
-                    while (i < countIn){
-                        Chip chipIn = (Chip) chgIn.getChildAt(i);
-                        Chip chipOut = (Chip) chgOut.getChildAt(i);
-                        if(chipIn.isChecked()){
-                            Entradas.add(chipIn.getText().toString());
-                        }
-                        if (chipOut.isChecked()){}
-                        Salidas.add(chipOut.getText().toString());
-                        i++;
-                    }
-
-                }
-                Toast toast = Toast.makeText(getApplicationContext(),Entradas.toString(),Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-    }
 }
