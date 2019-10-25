@@ -1,16 +1,19 @@
 package proyecto.transporte.udb;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,6 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import proyecto.transporte.udb.keepLogin.PreferenceUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,7 +55,13 @@ public class MainActivity extends AppCompatActivity {
 
         addRoute();
 
-
+        ImageButton imageButton = (ImageButton) findViewById(R.id.closed_session);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CreateDialog();
+            }
+        });
     }
     public void showInfo(View view){
         Intent intent = new Intent(view.getContext(), show_info.class);
@@ -89,7 +100,35 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
+    //***Salir***
+
+    public void onBackPressed()
+    {
+        CreateDialog();
+    }
+
+    private void CreateDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("¿Desea cerrar la sesión?");
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                PreferenceUtils.Clear(MainActivity.this);
+                MainActivity.super.onBackPressed();
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        builder.create().show();
+    }
 }
