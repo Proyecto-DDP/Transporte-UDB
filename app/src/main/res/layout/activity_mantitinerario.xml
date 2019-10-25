@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,183 +17,106 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.80"
-                android:hint="Entradas"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_width="0dp"
-                android:layout_weight="0.20"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_add"
-                android:layout_marginStart="4dp"
-                android:background="@drawable/roundcorner"
-                android:layout_gravity="center_vertical"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1"
-            android:layout_marginTop="16dp">
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.80"
-                android:hint="Salidas"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_width="0dp"
-                android:layout_weight="0.20"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_add"
-                android:layout_marginStart="4dp"
-                android:background="@drawable/roundcorner"
-                android:layout_gravity="center_vertical"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/in"
-                android:layout_marginTop="16dp"
-                android:textColor="@color/black"
-                android:paddingStart="16dp"
-                android:textStyle="bold"
-                />
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-        </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.80"
+                    android:hint="Código de itinerario">
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:scrollbars="none">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.chip.ChipGroup
-                android:layout_width="wrap_content"
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="0.20"
+                    android:background="@drawable/roundcorner"
+                    android:src="@drawable/ic_eye" />
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:chipSpacing="8dp">
+                android:hint="Nombre de itinerario">
 
-                <com.google.android.material.chip.Chip
-                    style="@style/ChipCustomStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="8:00am"
-                    android:textColor="@color/colorPrimary" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.chip.Chip
-                    style="@style/ChipCustomStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10:00am"
-                    android:textColor="@color/colorPrimary" />
 
-                <com.google.android.material.chip.Chip
-                    style="@style/ChipCustomStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="12:00pm"
-                    android:textColor="@color/colorPrimary" />
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:hint="Horarios de entrada">
 
-                <com.google.android.material.chip.Chip
-                    style="@style/ChipCustomStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3:30pm"
-                    android:textColor="@color/colorPrimary" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.chip.Chip
-                    style="@style/ChipCustomStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5:30pm"
-                    android:textColor="@color/colorPrimary" />
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
 
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Horarios de salida">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="16dp">
+            android:orientation="horizontal"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp">
 
-            <TextView
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/addZ"
+                android:background="@drawable/roundcorner"
+                android:layout_width="wrap_content"
+                android:padding="8dp"
+                android:drawablePadding="4dp"
                 android:layout_height="wrap_content"
-                android:text="@string/out"
-                android:textColor="@color/black"
-                android:paddingStart="16dp"
-                android:textStyle="bold"
-                />
+                android:drawableLeft="@drawable/ic_add"
+                android:textColor="@color/White"
+                android:text="Agregar"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:background="@drawable/roundcorner"
+                android:id="@+id/delZ"
+                android:padding="8dp"
+                android:drawablePadding="4dp"
+                android:textColor="@color/White"
+                android:layout_marginStart="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_delete"
+                android:text="Eliminar"/>
 
         </LinearLayout>
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:scrollbars="none"
-            >
-            <com.google.android.material.chip.ChipGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:chipSpacing="8dp"
-                android:layout_marginTop="8dp"
-                >
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:text="8:00am"
-                    style="@style/ChipCustomStyle"/>
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:text="10:00am"
-                    style="@style/ChipCustomStyle"/>
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:text="12:00pm"
-                    style="@style/ChipCustomStyle"/>
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:text="3:30pm"
-                    style="@style/ChipCustomStyle"/>
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:text="5:30pm"
-                    style="@style/ChipCustomStyle"/>
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
     </LinearLayout>
-
 </LinearLayout>
