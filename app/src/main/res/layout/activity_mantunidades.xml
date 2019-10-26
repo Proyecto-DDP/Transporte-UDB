@@ -82,7 +82,7 @@
                 android:hint="Zonas existentes">
 
                 <AutoCompleteTextView
-                    android:id="@+id/filled_exposed_dropdown"
+                    android:id="@+id/filled_zonas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_add"
                 android:textColor="@color/White"
-                android:text="Agregar"/>
+                android:text="AgregarZona"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:background="@drawable/roundcorner"
                 android:id="@+id/delZ"
