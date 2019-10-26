@@ -141,7 +141,8 @@ public class show_info extends AppCompatActivity {
             if (ComprobarHora(salida, 10,30))
             {
                 //Aquí pone como le querés cambiar el color :$
-                chip.setChipBackgroundColor(getColorStateList(R.color.yellow));
+                chip.setChipStrokeColor(getColorStateList(R.color.yellow));
+                chip.setChipStrokeWidth(4.0f);
             }
 
             chipGroup2.addView(chip);

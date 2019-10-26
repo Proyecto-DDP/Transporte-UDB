@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import proyecto.transporte.udb.keepLogin.PreferenceUtils;
 
@@ -30,6 +31,12 @@ public class AdminActivity extends AppCompatActivity {
                 CreateDialog();
             }
         });
+
+        //Cambiar el header
+        View includedLayout = findViewById(R.id.toolbar);
+        TextView title = (TextView)includedLayout.findViewById(R.id.tituloPantalla);
+        title.setText("Pantalla de administrador");
+
     }
 
     public void mantZona(View view){
