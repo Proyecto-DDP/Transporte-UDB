@@ -44,6 +44,10 @@ public class AdminActivity extends AppCompatActivity {
         Intent intent = new Intent(this, mant_unidades.class);
         startActivity(intent);
     }
+    public void mantUsuarios(View view){
+        Intent intent = new Intent(this, mant_usuarios.class);
+        startActivity(intent);
+    }
 
     //***Salir***
 
