@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import proyecto.transporte.udb.keepLogin.PreferenceUtils;
 
@@ -43,6 +44,11 @@ public class Modulo_motorista extends AppCompatActivity {
                 CreateDialog();
             }
         });
+
+        //Cambiando el título
+        View tt = findViewById(R.id.toolbar_main);
+        TextView title = (TextView) tt.findViewById(R.id.toolTitle);
+        title.setText("Pantalla de motorista");
     }
 
     public void enable_buttons() {
