@@ -38,6 +38,10 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"/>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".mant_usuarios"
+            android:parentActivityName=".AdminActivity"/>
+        <activity android:name=".mant_doble"
+            android:parentActivityName=".AdminActivity"/>
         <activity android:name=".mant_itinerario"
             android:parentActivityName=".AdminActivity"/>
         <activity android:name=".mant_unidades"
