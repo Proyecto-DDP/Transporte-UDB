@@ -26,11 +26,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.80"
-                    android:hint="Código de zona"
+                    android:hint="Nombre"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtinp_codigo"
+                        android:id="@+id/txtinp_nombre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -47,12 +47,12 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre de zona"
+                android:hint="Número de teléfono"
                 android:layout_marginTop="8dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtinp_nombre"
+                    android:id="@+id/txtinp_tel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -62,10 +62,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Zonas existentes">
+                android:hint="Tipo de usuario">
 
                 <AutoCompleteTextView
-                    android:id="@+id/filled_zonas"
+                    android:id="@+id/filled_tipo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />

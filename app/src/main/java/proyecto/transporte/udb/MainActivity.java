@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -62,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
                 CreateDialog();
             }
         });
+
+        //Título de la pantalla
+        View tt = findViewById(R.id.toolbar_main);
+        TextView title = (TextView) tt.findViewById(R.id.toolTitle);
+        title.setText("Pantalla principal");
     }
     public void showInfo(View view){
         Intent intent = new Intent(view.getContext(), show_info.class);

@@ -15,4 +15,6 @@
     <string name="nombre">Nombre:</string>
     <string name="telefono">Número de teléfono:</string>
     <string name="title_activity_maps">Map</string>
+    <string name="main">Pantalla principal</string>
+    <string name="admin">Pantalla de administrador</string>
 </resources>

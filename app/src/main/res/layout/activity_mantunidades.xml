@@ -43,7 +43,25 @@
                     android:background="@drawable/roundcorner"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Tipo de unidad">
 
+                <AutoCompleteTextView
+                    android:id="@+id/filled_tipoU"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
@@ -82,7 +100,7 @@
                 android:hint="Zonas existentes">
 
                 <AutoCompleteTextView
-                    android:id="@+id/filled_exposed_dropdown"
+                    android:id="@+id/filled_zonas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
@@ -120,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_add"
                 android:textColor="@color/White"
-                android:text="Agregar"/>
+                android:text="AgregarZona"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:background="@drawable/roundcorner"
                 android:id="@+id/delZ"

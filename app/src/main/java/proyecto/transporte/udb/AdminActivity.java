@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import proyecto.transporte.udb.keepLogin.PreferenceUtils;
 
@@ -30,6 +31,10 @@ public class AdminActivity extends AppCompatActivity {
                 CreateDialog();
             }
         });
+        //Cambiando el título
+        View tt = findViewById(R.id.toolbar_main);
+        TextView title = (TextView) tt.findViewById(R.id.toolTitle);
+        title.setText("Pantalla de administrador");
     }
 
     public void mantZona(View view){
@@ -42,6 +47,14 @@ public class AdminActivity extends AppCompatActivity {
     }
     public void mantUnidades(View view){
         Intent intent = new Intent(this, mant_unidades.class);
+        startActivity(intent);
+    }
+    public void mantUsuarios(View view){
+        Intent intent = new Intent(this, mant_usuarios.class);
+        startActivity(intent);
+    }
+    public void mantDoble(View view){
+        Intent intent = new Intent(this, mant_doble.class);
         startActivity(intent);
     }
 
