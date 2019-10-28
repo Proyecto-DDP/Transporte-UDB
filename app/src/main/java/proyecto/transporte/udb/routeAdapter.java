@@ -35,6 +35,7 @@ public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> 
     @Override
     public void onBindViewHolder(routeAdapter.viewHolder viewHolder, int position){
         viewHolder.routeName.setText(arrayList.get(position).getRouteN());
+        viewHolder.routeType.setText(arrayList.get(position).getType());
         viewHolder.routeImg.setImageResource(arrayList.get(position).getImage());
     }
 
@@ -45,7 +46,7 @@ public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> 
 
     public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView routeImg;
-        TextView routeName;
+        TextView routeName, routeType;
         //Botón para ir a la siguiente página
         Button ver_info;
         public viewHolder(View itemView){
@@ -53,6 +54,7 @@ public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> 
 
             routeImg = (ImageView) itemView.findViewById(R.id.media_image);
             routeName = (TextView) itemView.findViewById(R.id.primary_text);
+            routeType = (TextView) itemView.findViewById(R.id.sub_text);
             ver_info = (Button) itemView.findViewById(R.id.ver_info);
 
             ver_info.setOnClickListener(this);

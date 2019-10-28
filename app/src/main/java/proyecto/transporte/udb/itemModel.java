@@ -4,7 +4,14 @@ public class itemModel {
     int image;
     int status;
     String routeN;
+    String type;
 
+    public void setType(String type) {
+        this.type = type;
+    }
+    public String getType() {
+        return type;
+    }
     public int getImage(){
         return image;
     }

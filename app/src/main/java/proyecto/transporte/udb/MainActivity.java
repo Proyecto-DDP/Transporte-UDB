@@ -36,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<itemModel> arrayList;
     private int icons[] = {R.drawable.ic_bus,R.drawable.ic_bus,R.drawable.ic_bus,R.drawable.ic_bus};
-    private String routes[];
-    private int cantidadRutas=0;
+    private String ruta, tipo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,23 +78,20 @@ public class MainActivity extends AppCompatActivity {
         unidades.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                cantidadRutas = 0;
-                for(DataSnapshot conteo: dataSnapshot.getChildren()){
-                    cantidadRutas++;
-                }
-                routes = new String[cantidadRutas];
                 int i=0;
                 for(DataSnapshot placas : dataSnapshot.getChildren()){
                     unidadT = placas.getKey();
-                    routes[i] = dataSnapshot.child(unidadT).child("Zona").getValue(String.class) + " - "+unidadT;
-                    i++;
-                }
-                //No entiendo por que pero solo en este orden funciono
-                for (int j = 0; j < routes.length; j++){
+                    ruta = dataSnapshot.child(unidadT).child("Zona").getValue(String.class) + " - "+unidadT;
+                    tipo = dataSnapshot.child(unidadT).child("Tipo").getValue(String.class);
+
+                    //No entiendo por que solo la info permanece dentro de este método
                     itemModel itemModel = new itemModel();
-                    itemModel.setImage(icons[j]);
-                    itemModel.setRouteN(routes[j]);
+                    itemModel.setImage(icons[i]);
+                    itemModel.setRouteN(ruta);
+                    itemModel.setType(tipo);
                     arrayList.add(itemModel);
+
+                    i++;
                 }
                 routeAdapter adapter = new routeAdapter(getApplicationContext(), arrayList);
                 recyclerView.setAdapter(adapter);
