@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,8 +28,8 @@ public class mant_unidades extends AppCompatActivity {
     private TextInputEditText placa;
     private AutoCompleteTextView tipo, propietario, motorista, zona, itinerario;
     private String[] TIPOS = {"Microbus","Bus"};
-    private String[] PROPIETARIOS, MOTORISTAS, ZONAS, ITINERARIOS;
-    private int totPropietarios, totMotoristas, totZonas, totItinerarios;
+    private String[] PLACAS, PROPIETARIOS, MOTORISTAS, ZONAS, ITINERARIOS, ENTRADAS, SALIDAS;
+    private int totPlacas, totPropietarios, totMotoristas, totZonas, totItinerarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,25 @@ public class mant_unidades extends AppCompatActivity {
 
     //Llenado de los dropdown con informacion de firebase
     private void cargarInformacion() {
+        unidades.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int i = 0;
+                for (DataSnapshot conteoPlacas : dataSnapshot.getChildren()) {
+                    totPlacas++;
+                }
+                PLACAS = new String[totPlacas];
+                for (DataSnapshot conteoPlacas : dataSnapshot.getChildren()) {
+                    PLACAS[i] = conteoPlacas.getKey();
+                    i++;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         propietarios.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -124,10 +144,17 @@ public class mant_unidades extends AppCompatActivity {
         itinerarios.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int i = 0;
                 for (DataSnapshot conteoItinerarios : dataSnapshot.getChildren()) {
                     totItinerarios++;
                 }
-                //Falta programarlo
+                ITINERARIOS = new String[totItinerarios];
+                for (DataSnapshot conteoItinerarios : dataSnapshot.getChildren()) {
+                    ITINERARIOS[i] = conteoItinerarios.getKey();
+                    i++;
+                }
+                ArrayAdapter<String> adapter4 = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_item, ITINERARIOS);
+                itinerario.setAdapter(adapter4);
             }
 
             @Override
@@ -142,7 +169,10 @@ public class mant_unidades extends AppCompatActivity {
     public void buscarUnidad(View view){
         final String placaProv = placa.getText().toString().toUpperCase();
 
-        if ( placaProv != null || placaProv != ""){
+        if ( placaProv.equals("")){
+            Toast toast = Toast.makeText(getApplicationContext(),"Error, no dejar campos vacios", Toast.LENGTH_SHORT);
+            toast.show();
+        }else{
             unidades.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -151,7 +181,7 @@ public class mant_unidades extends AppCompatActivity {
                     propietario.setText(unidad.child("Propietario").child("Nombre").getValue(String.class));
                     motorista.setText(unidad.child("Motorista").child("Nombre").getValue(String.class));
                     zona.setText(unidad.child("Zona").getValue(String.class));
-                    itinerario.setText("Nada");
+                    itinerario.setText(unidad.child("Itinerario").child("ID").getValue(String.class));
                 }
 
                 @Override
@@ -162,4 +192,70 @@ public class mant_unidades extends AppCompatActivity {
         }
     }
 
+    public void agregarUnidad (View view){
+        if (validacion(placa.getText().toString(),tipo.getText().toString(),propietario.getText().toString(),motorista.getText().toString(),zona.getText().toString(), itinerario.getText().toString())){
+            Toast toast = Toast.makeText(getApplicationContext(),"Error, no dejar campos vacios", Toast.LENGTH_SHORT);
+            toast.show();
+        }else{
+            String placaNueva = placa.getText().toString().toUpperCase();
+            String tipoNuevo =  tipo.getText().toString();
+            String propietarioNuevo = propietario.getText().toString();
+            String motoristaNuevo = motorista.getText().toString();
+            String zonaNueva = zona.getText().toString();
+            String itinerarioNuevo = itinerario.getText().toString();
+            if (unidadExistente(placaNueva)){
+                Toast toast = Toast.makeText(getApplicationContext(),"Unidad existente", Toast.LENGTH_SHORT);
+                toast.show();
+            }else{
+                unidades.child(placaNueva).child("Estado").setValue("Fuera de viaje");
+                unidades.child(placaNueva).child("Foto").setValue("cadena");
+                unidades.child(placaNueva).child("Itinerario").child("Entrada").setValue("nada");
+                unidades.child(placaNueva).child("Itinerario").child("ID").setValue(itinerarioNuevo);
+                unidades.child(placaNueva).child("Itinerario").child("Salida").setValue("nada");
+                unidades.child(placaNueva).child("Itinerario").child("Viaje actual").setValue("nada");
+                unidades.child(placaNueva).child("Motorista").child("Foto").setValue("Enlace");
+                unidades.child(placaNueva).child("Motorista").child("ID").setValue("nada");
+                unidades.child(placaNueva).child("Motorista").child("Nombre").setValue(motoristaNuevo);
+                unidades.child(placaNueva).child("Motorista").child("Telefono").setValue("nada");
+                unidades.child(placaNueva).child("Propietario").child("Foto").setValue("Enlace");
+                unidades.child(placaNueva).child("Propietario").child("ID").setValue("nada");
+                unidades.child(placaNueva).child("Propietario").child("Nombre").setValue(propietarioNuevo);
+                unidades.child(placaNueva).child("Propietario").child("Telefono").setValue("nada");
+                unidades.child(placaNueva).child("Tipo").setValue(tipoNuevo);
+                unidades.child(placaNueva).child("Ubicacion").child("Latitud").setValue("13.6");
+                unidades.child(placaNueva).child("Ubicacion").child("Longitud").setValue("-89.3");
+                unidades.child(placaNueva).child("Zona").setValue(zonaNueva);
+
+                Toast toast = Toast.makeText(getApplicationContext(),"Unidad agregada", Toast.LENGTH_SHORT);
+                toast.show();
+                limpiarCampos();
+            }
+        }
+    }
+
+    private void limpiarCampos(){
+        placa.setText("");
+        tipo.setText("");
+        propietario.setText("");
+        motorista.setText("");
+        zona.setText("");
+        itinerario.setText("");
+    }
+
+    private Boolean validacion(String pl, String tp, String pr, String mt, String zn, String it){
+        if (pl.equals("") || tp.equals("") || pr.equals("") || mt.equals("") || zn.equals("") || it.equals("")){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private boolean unidadExistente(String valor){
+        for (String placa : PLACAS) {
+            if (valor.equals(placa)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

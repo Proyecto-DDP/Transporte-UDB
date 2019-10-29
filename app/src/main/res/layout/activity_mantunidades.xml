@@ -136,14 +136,15 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/addZ"
-                android:background="@drawable/roundcorner"
                 android:layout_width="wrap_content"
-                android:padding="8dp"
-                android:drawablePadding="4dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/roundcorner"
                 android:drawableLeft="@drawable/ic_add"
+                android:drawablePadding="4dp"
+                android:padding="8dp"
+                android:text="Agregar Unidad"
                 android:textColor="@color/White"
-                android:text="AgregarZona"/>
+                android:onClick="agregarUnidad"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:background="@drawable/roundcorner"
                 android:id="@+id/delZ"
