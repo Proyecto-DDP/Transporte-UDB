@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ArrayList<itemModel> arrayList;
-    private int icons[] = {R.drawable.ic_bus,R.drawable.ic_bus,R.drawable.ic_bus,R.drawable.ic_bus};
+    private int icons[] = {R.drawable.ic_bus};
     private String ruta, tipo;
 
     @Override
@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         unidades.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int i=0;
                 for(DataSnapshot placas : dataSnapshot.getChildren()){
                     unidadT = placas.getKey();
                     ruta = dataSnapshot.child(unidadT).child("Zona").getValue(String.class) + " - "+unidadT;
@@ -86,12 +85,10 @@ public class MainActivity extends AppCompatActivity {
 
                     //No entiendo por que solo la info permanece dentro de este método
                     itemModel itemModel = new itemModel();
-                    itemModel.setImage(icons[i]);
+                    itemModel.setImage(icons[0]);
                     itemModel.setRouteN(ruta);
                     itemModel.setType(tipo);
                     arrayList.add(itemModel);
-
-                    i++;
                 }
                 routeAdapter adapter = new routeAdapter(getApplicationContext(), arrayList);
                 recyclerView.setAdapter(adapter);

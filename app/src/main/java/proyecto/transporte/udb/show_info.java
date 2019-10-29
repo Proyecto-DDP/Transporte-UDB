@@ -142,6 +142,7 @@ public class show_info extends AppCompatActivity {
             {
                 //Aquí pone como le querés cambiar el color :$
                 chip.setChipBackgroundColor(getColorStateList(R.color.yellow));
+
             }
 
             chipGroup2.addView(chip);

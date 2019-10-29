@@ -90,16 +90,17 @@ public class mant_unidades extends AppCompatActivity {
                     }
                     totPropietarios++;
                 }
+                totRamasPropietarios++;
                 PROPIETARIOS = new String[totPropietarios];
                 ramasPROPIETARIOS = new String[totPropietarios][totRamasPropietarios];
                 for (DataSnapshot conteoPropietarios : dataSnapshot.getChildren()) {
-                    PROPIETARIOS[i] = conteoPropietarios.getValue(String.class);
+                    PROPIETARIOS[i] = conteoPropietarios.child("Nombre").getValue(String.class);
+                    ramasPROPIETARIOS [i][0] =  conteoPropietarios.getKey();
                     for(DataSnapshot ramas : conteoPropietarios.getChildren()){
-                        ramasPROPIETARIOS [i][j] = ramas.getValue(String.class);
+                        ramasPROPIETARIOS [i][j+1] = ramas.getValue(String.class);
                         j++;
                     }
                     j = 0;
-                    Log.d("---------PROPIETARIOS",PROPIETARIOS[i]);
                     i++;
                 }
                 ArrayAdapter<String> adapter1 = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_item, PROPIETARIOS);
@@ -122,12 +123,14 @@ public class mant_unidades extends AppCompatActivity {
                     }
                     totMotoristas++;
                 }
+                totRamasMotoristas++;
                 MOTORISTAS = new String[totMotoristas];
                 ramasMOTORISTAS = new String[totMotoristas][totRamasMotoristas];
                 for (DataSnapshot conteoMotoristas : dataSnapshot.getChildren()) {
-                    MOTORISTAS[i] = conteoMotoristas.getValue(String.class);
+                    MOTORISTAS[i] = conteoMotoristas.child("Nombre").getValue(String.class);
+                    ramasMOTORISTAS[i][0] = conteoMotoristas.getKey();
                     for(DataSnapshot ramas : conteoMotoristas.getChildren()){
-                        ramasMOTORISTAS[i][j] = ramas.getValue(String.class);
+                        ramasMOTORISTAS[i][j+1] = ramas.getValue(String.class);
                         j++;
                     }
                     j = 0;
@@ -174,12 +177,15 @@ public class mant_unidades extends AppCompatActivity {
                     }
                     totItinerarios++;
                 }
+                totRamasItinerarios++;
                 ITINERARIOS = new String[totItinerarios];
                 ramasITINERARIOS = new String[totItinerarios][totRamasItinerarios];
                 for (DataSnapshot conteoItinerarios : dataSnapshot.getChildren()) {
                     ITINERARIOS[i] = conteoItinerarios.getKey();
+                    ramasITINERARIOS [i][0] = conteoItinerarios.getKey();
                     for(DataSnapshot ramas : conteoItinerarios.getChildren()){
-                        ramasITINERARIOS[i][j] = ramas.getValue(String.class);
+                        ramasITINERARIOS[i][j+1] = ramas.getValue(String.class);
+                        j++;
                     }
                     j = 0;
                     i++;
@@ -238,20 +244,43 @@ public class mant_unidades extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(),"Unidad existente", Toast.LENGTH_SHORT);
                 toast.show();
             }else{
+                //llenado de unidad nueva
                 unidades.child(placaNueva).child("Estado").setValue("Fuera de viaje");
                 unidades.child(placaNueva).child("Foto").setValue("cadena");
-                unidades.child(placaNueva).child("Itinerario").child("Entrada").setValue("nada");
+
                 unidades.child(placaNueva).child("Itinerario").child("ID").setValue(itinerarioNuevo);
-                unidades.child(placaNueva).child("Itinerario").child("Salida").setValue("nada");
                 unidades.child(placaNueva).child("Itinerario").child("Viaje actual").setValue("nada");
-                unidades.child(placaNueva).child("Motorista").child("Foto").setValue("Enlace");
-                unidades.child(placaNueva).child("Motorista").child("ID").setValue("nada");
+                for(int i = 0; i < totItinerarios; i++){
+                    if(itinerarioNuevo.equals(ramasITINERARIOS[i][0])){
+                        unidades.child(placaNueva).child("Itinerario").child("Entrada").setValue(ramasITINERARIOS[i][1]);
+                        unidades.child(placaNueva).child("Itinerario").child("Salida").setValue(ramasITINERARIOS[i][2]);
+                        Log.d("--------ID",ramasITINERARIOS[i][0]);
+                        Log.d("--------ENTRADAS",ramasITINERARIOS[i][1]);
+                        //Log.d("--------SALIDAS",ramasITINERARIOS[i][2]);
+                        break;
+                    }
+                }
+
                 unidades.child(placaNueva).child("Motorista").child("Nombre").setValue(motoristaNuevo);
-                unidades.child(placaNueva).child("Motorista").child("Telefono").setValue("nada");
-                unidades.child(placaNueva).child("Propietario").child("Foto").setValue("Enlace");
-                unidades.child(placaNueva).child("Propietario").child("ID").setValue("nada");
+                unidades.child(placaNueva).child("Motorista").child("Foto").setValue("Enlace");
+                for(int i = 0; i < totMotoristas; i++){
+                    if(motoristaNuevo.equals(ramasMOTORISTAS[i][1])){
+                        unidades.child(placaNueva).child("Motorista").child("ID").setValue(ramasMOTORISTAS[i][0]);
+                        unidades.child(placaNueva).child("Motorista").child("Telefono").setValue(ramasMOTORISTAS[i][2]);
+                        break;
+                    }
+                }
+
                 unidades.child(placaNueva).child("Propietario").child("Nombre").setValue(propietarioNuevo);
-                unidades.child(placaNueva).child("Propietario").child("Telefono").setValue("nada");
+                unidades.child(placaNueva).child("Propietario").child("Foto").setValue("Enlace");
+                for(int i = 0; i < totPropietarios; i++){
+                    if(propietarioNuevo.equals(ramasPROPIETARIOS[i][1])){
+                        unidades.child(placaNueva).child("Propietario").child("ID").setValue(ramasPROPIETARIOS[i][0]);
+                        unidades.child(placaNueva).child("Propietario").child("Telefono").setValue(ramasPROPIETARIOS[i][2]);
+                        break;
+                    }
+                }
+
                 unidades.child(placaNueva).child("Tipo").setValue(tipoNuevo);
                 unidades.child(placaNueva).child("Ubicacion").child("Latitud").setValue("13.6");
                 unidades.child(placaNueva).child("Ubicacion").child("Longitud").setValue("-89.3");
