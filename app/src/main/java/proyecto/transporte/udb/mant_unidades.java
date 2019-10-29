@@ -293,6 +293,24 @@ public class mant_unidades extends AppCompatActivity {
         }
     }
 
+    public void eliminarUnidad(View view){
+        String eliminarUnidad = placa.getText().toString();
+        if(eliminarUnidad.equals("")){
+            Toast toast = Toast.makeText(getApplicationContext(),"Error, no dejar placa vacia", Toast.LENGTH_SHORT);
+            toast.show();
+        }else{
+            if(unidadExistente(eliminarUnidad)){
+                unidades.child(eliminarUnidad).removeValue();
+                Toast toast = Toast.makeText(getApplicationContext(),"Unidad eliminada", Toast.LENGTH_SHORT);
+                toast.show();
+                limpiarCampos();
+            }else{
+                Toast toast = Toast.makeText(getApplicationContext(),"Unidad no existente", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
+    }
+
     private void limpiarCampos(){
         placa.setText("");
         tipo.setText("");
