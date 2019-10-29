@@ -28,8 +28,10 @@ public class mant_unidades extends AppCompatActivity {
     private TextInputEditText placa;
     private AutoCompleteTextView tipo, propietario, motorista, zona, itinerario;
     private String[] TIPOS = {"Microbus","Bus"};
-    private String[] PLACAS, PROPIETARIOS, MOTORISTAS, ZONAS, ITINERARIOS, ENTRADAS, SALIDAS;
+    private String[] PLACAS, ZONAS, PROPIETARIOS, MOTORISTAS, ITINERARIOS;
+    private String[][] ramasPROPIETARIOS, ramasMOTORISTAS, ramasITINERARIOS;
     private int totPlacas, totPropietarios, totMotoristas, totZonas, totItinerarios;
+    private int totRamasPropietarios, totRamasMotoristas, totRamasItinerarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +83,22 @@ public class mant_unidades extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int i = 0;
+                int j = 0;
                 for (DataSnapshot conteoPropietarios : dataSnapshot.getChildren()) {
+                    for(DataSnapshot ramas : conteoPropietarios.getChildren()){
+                        totRamasPropietarios++;
+                    }
                     totPropietarios++;
                 }
                 PROPIETARIOS = new String[totPropietarios];
+                ramasPROPIETARIOS = new String[totPropietarios][totRamasPropietarios];
                 for (DataSnapshot conteoPropietarios : dataSnapshot.getChildren()) {
                     PROPIETARIOS[i] = conteoPropietarios.getValue(String.class);
+                    for(DataSnapshot ramas : conteoPropietarios.getChildren()){
+                        ramasPROPIETARIOS [i][j] = ramas.getValue(String.class);
+                        j++;
+                    }
+                    j = 0;
                     Log.d("---------PROPIETARIOS",PROPIETARIOS[i]);
                     i++;
                 }
@@ -103,12 +115,22 @@ public class mant_unidades extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int i = 0;
+                int j = 0;
                 for (DataSnapshot conteoMotoristas : dataSnapshot.getChildren()) {
+                    for(DataSnapshot ramas : conteoMotoristas.getChildren()){
+                        totRamasMotoristas++;
+                    }
                     totMotoristas++;
                 }
                 MOTORISTAS = new String[totMotoristas];
+                ramasMOTORISTAS = new String[totMotoristas][totRamasMotoristas];
                 for (DataSnapshot conteoMotoristas : dataSnapshot.getChildren()) {
                     MOTORISTAS[i] = conteoMotoristas.getValue(String.class);
+                    for(DataSnapshot ramas : conteoMotoristas.getChildren()){
+                        ramasMOTORISTAS[i][j] = ramas.getValue(String.class);
+                        j++;
+                    }
+                    j = 0;
                     i++;
                 }
                 ArrayAdapter<String> adapter2 = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_item, MOTORISTAS);
@@ -145,12 +167,21 @@ public class mant_unidades extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int i = 0;
+                int j = 0;
                 for (DataSnapshot conteoItinerarios : dataSnapshot.getChildren()) {
+                    for(DataSnapshot ramas : conteoItinerarios.getChildren()){
+                        totRamasItinerarios++;
+                    }
                     totItinerarios++;
                 }
                 ITINERARIOS = new String[totItinerarios];
+                ramasITINERARIOS = new String[totItinerarios][totRamasItinerarios];
                 for (DataSnapshot conteoItinerarios : dataSnapshot.getChildren()) {
                     ITINERARIOS[i] = conteoItinerarios.getKey();
+                    for(DataSnapshot ramas : conteoItinerarios.getChildren()){
+                        ramasITINERARIOS[i][j] = ramas.getValue(String.class);
+                    }
+                    j = 0;
                     i++;
                 }
                 ArrayAdapter<String> adapter4 = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_item, ITINERARIOS);
