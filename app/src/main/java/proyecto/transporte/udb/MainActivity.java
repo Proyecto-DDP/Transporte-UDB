@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<itemModel> arrayList;
     private int icons[] = {R.drawable.ic_bus};
-    private String ruta, tipo;
+    private String ruta, tipo, estado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     unidadT = placas.getKey();
                     ruta = dataSnapshot.child(unidadT).child("Zona").getValue(String.class) + " - "+unidadT;
                     tipo = dataSnapshot.child(unidadT).child("Tipo").getValue(String.class);
+                    estado = dataSnapshot.child(unidadT).child("Estado").getValue(String.class);
 
                     //No entiendo por que solo la info permanece dentro de este método
                     itemModel itemModel = new itemModel();
