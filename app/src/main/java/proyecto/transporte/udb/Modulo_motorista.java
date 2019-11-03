@@ -14,7 +14,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import proyecto.transporte.udb.keepLogin.PreferenceUtils;
 
@@ -23,15 +31,45 @@ public class Modulo_motorista extends AppCompatActivity {
     private Button iniciar;
     private Button finalizar;
     private Button desperfectos;
+    private TextView Nombre;
+    private ImageView FotoMotorista;
+    private TextView UnidadRuta;
 
+    private FirebaseDatabase database;
+    private DatabaseReference referencia;
+
+    public String Unidad;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String UserName;
+        UserName = PreferenceUtils.getUser(this);
+       /* if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                newString= null;
+            } else {
+                newString= extras.getString("USUARIO");
+            }
+        } else {
+            newString= (String) savedInstanceState.getSerializable("USUARIO");
+        }*/
+
+
+        database = FirebaseDatabase.getInstance();
+        referencia = database.getReference();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modulo_motorista);
 
         iniciar = (Button) findViewById(R.id.transmitir_ubi);
         finalizar = (Button) findViewById(R.id.dejar_transmitir);
         desperfectos = (Button) findViewById(R.id.desperfectos);
+
+        Nombre = (TextView) findViewById(R.id.nomb_motorista);
+        UnidadRuta = (TextView) findViewById(R.id.unidad_ruta);
+
+        FotoMotorista = (ImageView) findViewById(R.id.img_motorista);
+
 
         if (!runtime_permissions()){
             enable_buttons();
@@ -49,6 +87,10 @@ public class Modulo_motorista extends AppCompatActivity {
         View tt = findViewById(R.id.toolbar_main);
         TextView title = (TextView) tt.findViewById(R.id.toolTitle);
         title.setText("Pantalla de motorista");
+
+        //Métodos para asignar textos/imagen
+        ObtUnidad(UserName);
+
     }
 
     public void enable_buttons() {
@@ -68,6 +110,46 @@ public class Modulo_motorista extends AppCompatActivity {
     public void IniciarTransmision(View view) {
         Intent i = new Intent(this, GPS_Service.class);
         startService(i);
+    }
+
+    //Metodo para obtener Unidad:
+    public void ObtUnidad(final String uID){
+
+        referencia.child("Usuarios").child(uID).addListenerForSingleValueEvent(
+                new ValueEventListener () {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Lo ENCUENTRA
+                        Unidad = dataSnapshot.child("Unidad").getValue(String.class);
+                        InfoCampos(Unidad);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // Por si falla
+                    }
+                });
+    }
+
+    //Metodo para llenar info de Unidad:
+    public void InfoCampos(final String uID){
+
+        referencia.child("Unidades").child(Unidad).addListenerForSingleValueEvent(
+                new ValueEventListener () {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Lo ENCUENTRA
+                        Nombre.setText(dataSnapshot.child("Motorista").child("Nombre").getValue(String.class));
+                        String tipo = dataSnapshot.child("Zona").getValue(String.class);
+                        String UnidadrutaS = Unidad + " - " + tipo;
+                        UnidadRuta.setText(UnidadrutaS);
+                        Picasso.get().load(dataSnapshot.child("Motorista").child("Foto").getValue(String.class)).into(FotoMotorista);
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // Por si falla
+                    }
+                });
     }
 
     //Este método revisa si los permisos necesarios para acceder a la ubicacion se encuentran aceptados, sino solicita acepatarlos
@@ -123,5 +205,17 @@ public class Modulo_motorista extends AppCompatActivity {
         });
 
         builder.create().show();
+    }
+
+    public void CrearDialogo(String titulo, String mensaje) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(titulo);
+        builder.setMessage(mensaje);
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.show();
     }
 }
