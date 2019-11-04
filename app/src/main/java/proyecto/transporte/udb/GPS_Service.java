@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import proyecto.transporte.udb.keepLogin.PreferenceUtils;
+
 public class GPS_Service extends Service {
     @Nullable
     @Override
@@ -48,8 +50,9 @@ public class GPS_Service extends Service {
         unidades = database.getReference("Unidades");
         usuarios = database.getReference("Usuarios");
 
-        Login login = new Login();
-        motorista = login.usuarioMotorista;
+        //Login login = new Login();
+       // motorista = login.usuarioMotorista;
+        motorista = PreferenceUtils.getUser(this);
 
         usuarios.addValueEventListener(new ValueEventListener() {
             @Override

@@ -35,9 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ArrayList<itemModel> arrayList;
-    private int icons[] = {R.drawable.ic_bus,R.drawable.ic_bus,R.drawable.ic_bus,R.drawable.ic_bus};
-    private String routes[];
-    private int cantidadRutas=0;
+    private int icons[] = {R.drawable.ic_bus};
+    private String ruta, tipo, estado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,22 +78,17 @@ public class MainActivity extends AppCompatActivity {
         unidades.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                cantidadRutas = 0;
-                for(DataSnapshot conteo: dataSnapshot.getChildren()){
-                    cantidadRutas++;
-                }
-                routes = new String[cantidadRutas];
-                int i=0;
                 for(DataSnapshot placas : dataSnapshot.getChildren()){
                     unidadT = placas.getKey();
-                    routes[i] = dataSnapshot.child(unidadT).child("Zona").getValue(String.class) + " - "+unidadT;
-                    i++;
-                }
-                //No entiendo por que pero solo en este orden funciono
-                for (int j = 0; j < routes.length; j++){
+                    ruta = dataSnapshot.child(unidadT).child("Zona").getValue(String.class) + " - "+unidadT;
+                    tipo = dataSnapshot.child(unidadT).child("Tipo").getValue(String.class);
+                    estado = dataSnapshot.child(unidadT).child("Estado").getValue(String.class);
+
+                    //No entiendo por que solo la info permanece dentro de este método
                     itemModel itemModel = new itemModel();
-                    itemModel.setImage(icons[j]);
-                    itemModel.setRouteN(routes[j]);
+                    itemModel.setImage(icons[0]);
+                    itemModel.setRouteN(ruta);
+                    itemModel.setType(tipo);
                     arrayList.add(itemModel);
                 }
                 routeAdapter adapter = new routeAdapter(getApplicationContext(), arrayList);
