@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import android.content.Context;
 
 public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> {
-    Context context;
-    ArrayList<itemModel> arrayList;
-    String [] provisional;
-    String placa;
+    private Context context;
+    private ArrayList<itemModel> arrayList;
+    private String [] provisional;
+    private String placa;
 
     public routeAdapter(Context context, ArrayList<itemModel> arrayList){
         this.context = context;
@@ -34,6 +34,7 @@ public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> 
 
     @Override
     public void onBindViewHolder(routeAdapter.viewHolder viewHolder, int position){
+        //Se carga la informacion obtenida en la lista de unidades y se asigna en cada tarjeta
         viewHolder.routeName.setText(arrayList.get(position).getRouteN());
         viewHolder.routeType.setText(arrayList.get(position).getType());
         viewHolder.routeImg.setImageResource(arrayList.get(position).getImage());
@@ -44,6 +45,7 @@ public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> 
         return arrayList.size();
     }
 
+    //Se generan las tarjetas de las unidades
     public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView routeImg;
         TextView routeName, routeType;
@@ -66,6 +68,8 @@ public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> 
                 case R.id.ver_info:
                     Intent intent = new Intent(view.getContext(), show_info.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    //Se envia la placa de la unidad a la pantalla show_info por medio de un Extra
                     intent.putExtra("RUTA",routeName.getText());
                     view.getContext().startActivity(intent);
                     break;

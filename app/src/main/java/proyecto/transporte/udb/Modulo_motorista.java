@@ -28,51 +28,39 @@ import proyecto.transporte.udb.keepLogin.PreferenceUtils;
 
 public class Modulo_motorista extends AppCompatActivity {
 
+    private FirebaseDatabase database;
+    private DatabaseReference referencia;
     private Button iniciar;
     private Button finalizar;
     private Button desperfectos;
     private TextView Nombre;
     private ImageView FotoMotorista;
     private TextView UnidadRuta;
+    public  String Unidad, UserName;
 
-    private FirebaseDatabase database;
-    private DatabaseReference referencia;
-
-    public String Unidad;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String UserName;
+        super.onCreate(savedInstanceState);
+
+        //Inicializacion de variables
         UserName = PreferenceUtils.getUser(this);
-       /* if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                newString= null;
-            } else {
-                newString= extras.getString("USUARIO");
-            }
-        } else {
-            newString= (String) savedInstanceState.getSerializable("USUARIO");
-        }*/
-
-
         database = FirebaseDatabase.getInstance();
         referencia = database.getReference();
-
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modulo_motorista);
-
         iniciar = (Button) findViewById(R.id.transmitir_ubi);
         finalizar = (Button) findViewById(R.id.dejar_transmitir);
         desperfectos = (Button) findViewById(R.id.desperfectos);
-
         Nombre = (TextView) findViewById(R.id.nomb_motorista);
         UnidadRuta = (TextView) findViewById(R.id.unidad_ruta);
-
         FotoMotorista = (ImageView) findViewById(R.id.img_motorista);
 
+        //Métodos para asignar textos/imagen
+        ObtUnidad(UserName);
 
+        //Revisa si los permisos de la aplicacion han sido otorgados para activar los botones de transmitir
+        //y finalizar transmision
         if (!runtime_permissions()){
-            enable_buttons();
+            //enable_buttons();
         }
 
         ImageButton imageButton = (ImageButton) findViewById(R.id.closed_session);
@@ -88,28 +76,34 @@ public class Modulo_motorista extends AppCompatActivity {
         TextView title = (TextView) tt.findViewById(R.id.toolTitle);
         title.setText("Pantalla de motorista");
 
-        //Métodos para asignar textos/imagen
-        ObtUnidad(UserName);
-
     }
 
+    //Activa los botones
     public void enable_buttons() {
         IniciarTransmision(iniciar);
         FinalizarTransmision(finalizar);
-        ReportarDesperfecto(desperfectos);
+        //ReportarDesperfecto(desperfectos);
     }
 
+    //Metodo para el boton de despefectos mecanicos
     public void ReportarDesperfecto(View view) {
+        Intent i = new Intent(this, GPS_Service.class);
+        stopService(i);
+        referencia.child("Unidades").child(Unidad).child("Estado").setValue("Desperfectos mecanicos");
     }
 
+    //Metodo para el boton de finalizar transmision
     public void FinalizarTransmision(View view) {
         Intent i = new Intent(this, GPS_Service.class);
         stopService(i);
+        referencia.child("Unidades").child(Unidad).child("Estado").setValue("Fuera de viaje");
     }
 
+    //Metodo para el boton de iniciar transmision
     public void IniciarTransmision(View view) {
         Intent i = new Intent(this, GPS_Service.class);
         startService(i);
+        referencia.child("Unidades").child(Unidad).child("Estado").setValue("Realizando viaje");
     }
 
     //Metodo para obtener Unidad:
@@ -155,7 +149,7 @@ public class Modulo_motorista extends AppCompatActivity {
     //Este método revisa si los permisos necesarios para acceder a la ubicacion se encuentran aceptados, sino solicita acepatarlos
     private boolean runtime_permissions() {
         if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},100);
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION},100);
             return true;
         }
         return false;
@@ -176,7 +170,8 @@ public class Modulo_motorista extends AppCompatActivity {
         }
     }
 
-    //***Salir***
+
+    //***Salir*** (cuando se cierra la sesion)
 
     public void onBackPressed()
     {

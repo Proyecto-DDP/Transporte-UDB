@@ -32,9 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference unidades;
     private String unidadT;
-
-    RecyclerView recyclerView;
-    ArrayList<itemModel> arrayList;
+    private RecyclerView recyclerView;
+    private ArrayList<itemModel> arrayList;
     private int icons[] = {R.drawable.ic_bus};
     private String ruta, tipo, estado;
 
@@ -45,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         unidades = database.getReference("Unidades");
-
         Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView_Main);
         arrayList = new ArrayList<>();
 
+        //Metodo que genera las tarjetas con la informacion de las unidades
+        //Genera tantas tarjetas como unidades hay en el firebase registradas
         addRoute();
 
         ImageButton imageButton = (ImageButton) findViewById(R.id.closed_session);
@@ -68,13 +67,18 @@ public class MainActivity extends AppCompatActivity {
         TextView title = (TextView) tt.findViewById(R.id.toolTitle);
         title.setText("Pantalla principal");
     }
+
+    //Metodo para el boton que muestra la informacion de cada unidad
     public void showInfo(View view){
         Intent intent = new Intent(view.getContext(), show_info.class);
         startActivity(intent);
     }
 
+
     public void addRoute(){
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+
+        //Se obtiene la informacion del firebase de cada unidad y se es cargada en el recycler view
         unidades.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -92,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
                     arrayList.add(itemModel);
                 }
                 routeAdapter adapter = new routeAdapter(getApplicationContext(), arrayList);
+
+                //Se manda la lista de unidades que se utilizara en el adapter para llenar el recycler view
                 recyclerView.setAdapter(adapter);
             }
 
@@ -102,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //***Salir***
+    //***Salir*** (Cerrar sesion)
 
     public void onBackPressed()
     {
