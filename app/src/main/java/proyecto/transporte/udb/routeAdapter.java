@@ -17,10 +17,17 @@ import java.util.ArrayList;
 import android.content.Context;
 
 public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> {
+<<<<<<< HEAD
     Context context;
     ArrayList<itemModel> arrayList;
     String[] provisional;
     String placa;
+=======
+    private Context context;
+    private ArrayList<itemModel> arrayList;
+    private String [] provisional;
+    private String placa;
+>>>>>>> database
 
     public routeAdapter(Context context, ArrayList<itemModel> arrayList) {
         this.context = context;
@@ -48,7 +55,12 @@ public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> 
         return arrayList.size();
     }
 
+<<<<<<< HEAD
     public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+=======
+    //Se generan las tarjetas de las unidades
+    public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+>>>>>>> database
         ImageView routeImg;
         TextView routeName, routeType;
         FrameLayout statusColor;
@@ -79,7 +91,13 @@ public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> 
                 case R.id.ver_info:
                     Intent intent = new Intent(view.getContext(), show_info.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+<<<<<<< HEAD
                     intent.putExtra("RUTA", routeName.getText());
+=======
+
+                    //Se envia la placa de la unidad a la pantalla show_info por medio de un Extra
+                    intent.putExtra("RUTA",routeName.getText());
+>>>>>>> database
                     view.getContext().startActivity(intent);
                     break;
             }

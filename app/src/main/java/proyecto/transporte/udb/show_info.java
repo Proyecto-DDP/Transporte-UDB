@@ -33,15 +33,14 @@ import com.squareup.picasso.Picasso;
 import java.util.Calendar;
 
 public class show_info extends AppCompatActivity {
-    int rotationAngle = 0;
-    ChipGroup chipGroup1, chipGroup2;
 
+    int rotationAngle = 0;
+    private ChipGroup chipGroup1, chipGroup2;
     private FirebaseDatabase database;
     private DatabaseReference unidades;
     private String [] provicional;
     private String entradasProvicional, salidasProvicional;
     public static String placa;
-
     public Calendar hora = Calendar.getInstance();
     int hora_actual;
     int minuto_actual;
@@ -148,6 +147,7 @@ public class show_info extends AppCompatActivity {
             chipGroup2.addView(chip);
         }
     }
+
     //Animación para expandir
     public static void expand(final View v, int duration, int targetHeight) {
 
@@ -166,6 +166,7 @@ public class show_info extends AppCompatActivity {
         valueAnimator.setDuration(duration);
         valueAnimator.start();
     }
+
     //Animación para retraer
     public static void collapse(final View v, int duration, int targetHeight) {
         int prevHeight  = v.getHeight();
@@ -189,6 +190,7 @@ public class show_info extends AppCompatActivity {
 
     }
 
+    //**************************MANEJO DE HORAS DE AQUI EN ADELANTE****************88
     public boolean ComprobarHora(String hora_og, int s_mins, int r_mins)
     {
         String[] hora_str;
