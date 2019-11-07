@@ -32,27 +32,43 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-        //Cambiar el header
-        View includedLayout = findViewById(R.id.toolbar);
-        TextView title = (TextView)includedLayout.findViewById(R.id.tituloPantalla);
+        //Cambiando el título
+        View tt = findViewById(R.id.toolbar_main);
+        TextView title = (TextView) tt.findViewById(R.id.toolTitle);
         title.setText("Pantalla de administrador");
-
     }
 
+    //Metodo que envia a la pantalla de mantenimiento de zonas
     public void mantZona(View view){
         Intent intent = new Intent(this, mant_zona.class);
         startActivity(intent);
     }
+
+    //Metodo que envia a la pantalla de mantenimiento de itinerarios
     public void mantItinerario(View view){
         Intent intent = new Intent(this, mant_itinerario.class);
         startActivity(intent);
     }
+
+    //Metodo que envia a la pantalla de mantenimiento de unidades
     public void mantUnidades(View view){
         Intent intent = new Intent(this, mant_unidades.class);
         startActivity(intent);
     }
 
-    //***Salir***
+    //Metodo que envia a la pantalla de mantenimiento de usuarios
+    public void mantUsuarios(View view){
+        Intent intent = new Intent(this, mant_usuarios.class);
+        startActivity(intent);
+    }
+
+    //Metodo que envia a la pantalla de mantenimiento de motoristas y propietarios
+    public void mantDoble(View view){
+        Intent intent = new Intent(this, mant_doble.class);
+        startActivity(intent);
+    }
+
+    //***Salir*** (Cerrar sesion)
 
     public void onBackPressed()
     {

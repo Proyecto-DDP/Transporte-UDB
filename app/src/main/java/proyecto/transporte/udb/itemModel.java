@@ -2,19 +2,24 @@ package proyecto.transporte.udb;
 
 public class itemModel {
     int image;
-    int status;
+    String status;
     String routeN;
+    String type;
 
+    public void setType(String type) {
+        this.type = type;
+    }
+    public String getType() {
+        return type;
+    }
     public int getImage(){
         return image;
     }
     public void setImage(int image){
         this.image = image;
     }
-    public int getStatus(){
-        return status;
-    }
-    public void setStatus(int status){
+    public String getStatus(){ return status; }
+    public void setStatus(String status){
         this.status = status;
     }
     public String getRouteN(){

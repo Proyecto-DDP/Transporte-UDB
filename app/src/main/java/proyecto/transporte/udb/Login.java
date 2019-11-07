@@ -22,14 +22,9 @@ public class Login extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference referencia;
-
-
     public String username;
     public String password;
     public String tipo;
-
-    public static String usuarioMotorista="";
-
     private EditText Usuario;
     private EditText Password;
 
@@ -38,9 +33,9 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         Usuario = findViewById(R.id.carnet);
         Password = findViewById(R.id.pass);
-
         database = FirebaseDatabase.getInstance();
         referencia = database.getReference();
 
@@ -64,9 +59,8 @@ public class Login extends AppCompatActivity {
         }
     }
 
-
+    //Metodo que identifica a que pantalla sera dirigido el usuario, segun su tipo
     public void Identify(final String uID, final String uPASS){
-
         referencia.child("Usuarios").child(uID).addListenerForSingleValueEvent(
                 new ValueEventListener () {
                     @Override
@@ -117,18 +111,13 @@ public class Login extends AppCompatActivity {
 
     //En respuesta al botón
     public void nextActivity(View view) {
-        // Intent intent = new Intent(this, MainActivity.class);
-
-        // startActivity(intent);
-
       username = Usuario.getText().toString();
-      actualizarValor();
       password = Password.getText().toString();
-      //  CrearDialogo(username, password);
 
-        Identify(username, password);
+      Identify(username, password);
     }
 
+    //Crea un dialogo al iniciar sesion
     public void CrearDialogo(String titulo, String mensaje) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(titulo);
@@ -141,12 +130,15 @@ public class Login extends AppCompatActivity {
         builder.show();
     }
 
+
+    //Metodo que dirigie a la pantalla donde se muestran las unidades
     public void ActividadSig()
     {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+    //Metodo que dirige a la pantalla del motorista
     public void ActividadMotorista(){
         Intent intent = new Intent(this, Modulo_motorista.class);
         intent.putExtra("USUARIO",username);
@@ -154,13 +146,9 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //Metodo que dirige a la pantalla del administrador
     public void ActividadAdministrador(){
         Intent intent = new Intent(this, AdminActivity.class);
         startActivity(intent);
-    }
-
-    //Sirve para enviar el usuario al GPS_Service
-    void actualizarValor(){
-        usuarioMotorista = username;
     }
 }

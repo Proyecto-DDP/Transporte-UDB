@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import proyecto.transporte.udb.keepLogin.PreferenceUtils;
+
 public class GPS_Service extends Service {
     @Nullable
     @Override
@@ -30,13 +32,8 @@ public class GPS_Service extends Service {
     private FirebaseDatabase database;
     private DatabaseReference unidades;
     private DatabaseReference usuarios;
-
     private LocationListener listener;
     private LocationManager locationManager;
-
-    private Double longitud;
-    private Double latitud;
-
     private String motorista;
     private String placa;
 
@@ -48,9 +45,10 @@ public class GPS_Service extends Service {
         unidades = database.getReference("Unidades");
         usuarios = database.getReference("Usuarios");
 
-        Login login = new Login();
-        motorista = login.usuarioMotorista;
+        //Se toma el usuario del motorista de la sesion
+        motorista = PreferenceUtils.getUser(this);
 
+        //Se obtiene la placa de la unidad de transporte a partir del motorista
         usuarios.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -63,9 +61,12 @@ public class GPS_Service extends Service {
             }
         });
 
+        //Se actualiza la ubicacion de la unidad de transporte cada 3 segundos
         listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
+
+                //Envio de la nueva ubicacion
                 unidades.child(placa).child("Ubicacion").child("Latitud").setValue(location.getLatitude());
                 unidades.child(placa).child("Ubicacion").child("Longitud").setValue(location.getLongitude());
             }
@@ -89,15 +90,20 @@ public class GPS_Service extends Service {
         };
 
         locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+
+        //Aqui se especifica cada cuanto tiempo y cada cuanta distancia se actualiza la ubicacion
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000,0,listener);
     }
 
 
+
+    //Metodo que se utiliza para dejar de transmitir la ubicacion
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(locationManager != null)
+        if(locationManager != null){
             locationManager.removeUpdates(listener);
+        }
     }
 
 }
