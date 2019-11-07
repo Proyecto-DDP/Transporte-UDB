@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     itemModel.setImage(icons[0]);
                     itemModel.setRouteN(ruta);
                     itemModel.setType(tipo);
+                    itemModel.setStatus(estado);
                     arrayList.add(itemModel);
                 }
                 routeAdapter adapter = new routeAdapter(getApplicationContext(), arrayList);

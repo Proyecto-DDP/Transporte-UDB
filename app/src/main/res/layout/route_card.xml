@@ -16,8 +16,7 @@
         tools:ignore="ContentDescription">
 
         <FrameLayout
-            android:id="status_color"
-            android:background="@color/green"
+            android:id="@+id/status_color"
             android:layout_width="4dp"
             android:layout_height="match_parent"/>
 

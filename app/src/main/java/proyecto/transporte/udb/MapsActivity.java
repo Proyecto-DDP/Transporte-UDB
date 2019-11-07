@@ -3,6 +3,7 @@ package proyecto.transporte.udb;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -14,6 +15,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +30,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FirebaseDatabase database;
     private DatabaseReference unidades;
     private  DatabaseReference usuarios;
+
+    private Polyline gpsTrack;
 
     private Double latitud, longitud;
     private LatLng userLocation;
@@ -80,6 +85,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
+        //Dibujando la línea de la ruta
+        PolylineOptions polylineOptions = new PolylineOptions();
+        polylineOptions.color(Color.RED);
+        polylineOptions.width(4);
+        gpsTrack = mMap.addPolyline(polylineOptions);
 
         unidades.addValueEventListener(new ValueEventListener() {
             @Override
