@@ -30,12 +30,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FirebaseDatabase database;
     private DatabaseReference unidades;
     private  DatabaseReference usuarios;
-<<<<<<< HEAD
-
     private Polyline gpsTrack;
 
-=======
->>>>>>> database
     private Double latitud, longitud;
     private LatLng userLocation;
     private Marker usuario;
