@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         View tt = findViewById(R.id.toolbar_main);
         TextView title = (TextView) tt.findViewById(R.id.toolTitle);
         title.setText("Pantalla principal");
-    }
+    }{}
 
     //Metodo para el boton que muestra la informacion de cada unidad
     public void showInfo(View view){
