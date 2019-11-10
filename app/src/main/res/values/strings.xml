@@ -18,4 +18,8 @@
     <string name="adminHeader">Pantalla de administrador</string>
     <string name="main">Pantalla principal</string>
     <string name="admin">Pantalla de administrador</string>
+    <string name="Popup_title">Significado de los colores</string>
+    <string name="red">Ruta fuera de servicio</string>
+    <string name="green">Ruta realizando viaje</string>
+    <string name="yellow">Ruta con desperfectos mecánicos</string>
 </resources>

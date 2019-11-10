@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -19,8 +20,6 @@ import android.content.Context;
 public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> {
     Context context;
     ArrayList<itemModel> arrayList;
-    String[] provisional;
-    String placa;
 
     public routeAdapter(Context context, ArrayList<itemModel> arrayList) {
         this.context = context;
@@ -41,6 +40,20 @@ public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> 
         viewHolder.routeType.setText(arrayList.get(position).getType());
         viewHolder.routeImg.setImageResource(arrayList.get(position).getImage());
         viewHolder.status = arrayList.get(position).getStatus();
+        switch(viewHolder.status){
+            case "Realizando viaje":
+                viewHolder.statusColor.setBackgroundColor(Color.parseColor("#00701a"));
+                break;
+            case "Desperfectos mecanicos":
+                viewHolder.statusColor.setBackgroundColor(Color.parseColor("##FEDE40"));
+                break;
+            case "Fuera de viaje":
+                viewHolder.statusColor.setBackgroundColor(Color.parseColor("#FF2525"));
+                break;
+            default:
+                viewHolder.statusColor.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                break;
+        }
     }
 
     @Override
@@ -65,10 +78,6 @@ public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> 
             ver_info = (Button) itemView.findViewById(R.id.ver_info);
             statusColor = (FrameLayout) itemView.findViewById(R.id.status_color);
 
-            if (status != "") {
-
-                statusColor.setBackgroundColor(Color.parseColor("#00701a"));
-            }
 
             ver_info.setOnClickListener(this);
 
