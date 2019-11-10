@@ -7,8 +7,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,10 +40,14 @@ public class MainActivity extends AppCompatActivity {
     private int icons[] = {R.drawable.ic_bus};
     private String ruta, tipo, estado;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        myDialog = new Dialog(this);
 
         database = FirebaseDatabase.getInstance();
         unidades = database.getReference("Unidades");
@@ -69,22 +76,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Metodo para el boton que muestra la informacion de cada unidad
-    public void showInfo(View view){
+    public void showInfo(View view) {
         Intent intent = new Intent(view.getContext(), show_info.class);
         startActivity(intent);
     }
 
 
-    public void addRoute(){
+    public void addRoute() {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
 
         //Se obtiene la informacion del firebase de cada unidad y se es cargada en el recycler view
         unidades.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot placas : dataSnapshot.getChildren()){
+                for (DataSnapshot placas : dataSnapshot.getChildren()) {
                     unidadT = placas.getKey();
-                    ruta = dataSnapshot.child(unidadT).child("Zona").getValue(String.class) + " - "+unidadT;
+                    ruta = dataSnapshot.child(unidadT).child("Zona").getValue(String.class) + " - " + unidadT;
                     tipo = dataSnapshot.child(unidadT).child("Tipo").getValue(String.class);
                     estado = dataSnapshot.child(unidadT).child("Estado").getValue(String.class);
 
@@ -93,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     itemModel.setImage(icons[0]);
                     itemModel.setRouteN(ruta);
                     itemModel.setType(tipo);
+                    itemModel.setStatus(estado);
                     arrayList.add(itemModel);
                 }
                 routeAdapter adapter = new routeAdapter(getApplicationContext(), arrayList);
@@ -110,13 +118,11 @@ public class MainActivity extends AppCompatActivity {
 
     //***Salir*** (Cerrar sesion)
 
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         CreateDialog();
     }
 
-    private void CreateDialog()
-    {
+    private void CreateDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("¿Desea cerrar la sesión?");
         builder.setCancelable(false);
@@ -137,4 +143,20 @@ public class MainActivity extends AppCompatActivity {
 
         builder.create().show();
     }
-}
+
+    Dialog myDialog;
+       public void ShowPopup(View v) {
+            TextView Closetxt;
+            myDialog.setContentView(R.layout.custompopup);
+            Closetxt = (TextView) myDialog.findViewById(R.id.Closetxt);
+            Closetxt.setText("X");
+            Closetxt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myDialog.dismiss();
+                }
+            });
+            myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            myDialog.show();
+        }
+    }

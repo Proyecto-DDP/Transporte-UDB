@@ -17,7 +17,6 @@ public class mant_doble extends AppCompatActivity{
         Toolbar toolbar = findViewById(R.id.toolbar_back);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        
 
     }
 }
