@@ -3,6 +3,7 @@ package proyecto.transporte.udb;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -14,6 +15,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,26 +30,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FirebaseDatabase database;
     private DatabaseReference unidades;
     private  DatabaseReference usuarios;
+    private Polyline gpsTrack;
 
     private Double latitud, longitud;
     private LatLng userLocation;
     private Marker usuario;
 
     //*********************ESTA INFO LA DEBO DE TOMAR DE FIREBASE Y EL BOTON ES QUIEN ME LA PASA********************//
-    private String motorista;
     private String placa;
-    private String [] provicional;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps);
 
         //Encontrar la placa
         show_info provi= new show_info();
         placa = provi.placa;
         Log.d("PLACA",placa);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -70,17 +72,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+        //Se inicializa el marcador de la unidad en la ubicacion de sydney por primera vez
         LatLng sydney = new LatLng(-34, 151);
         usuario = mMap.addMarker(new MarkerOptions()
                 .position(sydney)
-                .title("Mi ubicacion")
+                .title("Ubicación unidad")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.busicono))
         );
 
+        //La camara se mueve a la ubicacion de sydney
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
+
+        //Dibujando la línea de la ruta
+        PolylineOptions polylineOptions = new PolylineOptions();
+        polylineOptions.color(Color.RED);
+        polylineOptions.width(4);
+        gpsTrack = mMap.addPolyline(polylineOptions);
+        //Se activan los botones de zoom
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-
+        //Se actualiza la ubicacion del marcador segun la informacion del firebase
         unidades.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -89,19 +101,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("LONGITUD",longitud.toString());
                 userLocation = new LatLng(latitud,longitud);
 
+                //Se actualiza la ubicacion
                 usuario.setPosition(userLocation);
+
+                //Se mueve la camara a la nueva ubicacion de la unidad
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("GPSDebug", "loadPost:onCancelled", databaseError.toException());
+                Log.d("GPSDebug", "loadPost:onCancelled", databaseError.toException());
             }
         });
-
-        // Add a marker in Sydney and move the camera
-
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-
     }
 }

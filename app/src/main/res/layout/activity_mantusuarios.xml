@@ -89,7 +89,7 @@
                     android:drawableLeft="@drawable/ic_add"
                     android:textColor="@color/White"
                     android:text="Agregar"
-                    android:onClick="AgregarZona"/>
+                    android:onClick="agregarZona"/>
                 <androidx.appcompat.widget.AppCompatButton
                     android:background="@drawable/roundcorner"
                     android:id="@+id/delZ"
@@ -101,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_delete"
                     android:text="Eliminar"
-                    android:onClick="EliminarZona"/>
+                    android:onClick="eliminarZona"/>
 
             </LinearLayout>
         </LinearLayout>

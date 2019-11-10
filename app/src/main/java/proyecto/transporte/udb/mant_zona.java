@@ -60,7 +60,7 @@ public class mant_zona extends AppCompatActivity {
                     ZONAS[i] = znas.getValue(String.class);
                     i++;
                 }
-                Log.d("----------------ZONAS", ZONAS[0]);
+                //Log.d("----------------ZONAS", ZONAS[0]);
                 ArrayAdapter<String> adapter =
                         new ArrayAdapter<>(
                                 getApplicationContext(),
@@ -80,44 +80,70 @@ public class mant_zona extends AppCompatActivity {
         listaZonas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("--------------ZONA", CODIGO[position]);
-                Log.d("------------------VIEW",view.toString());
-                Log.d("--------------POSITION", String.valueOf(position));
-                Log.d("--------------ID", String.valueOf(id));
-                Log.d("--------------TEXTO", listaZonas.getText().toString());
                 codigo.setText(CODIGO[position]);
                 nombre.setText(ZONAS[position]);
             }
         });
     }
 
-    public void AgregarZona(View view){
-        String nuevaZona = nombre.getText().toString();
-        final String nuevoCodigo = codigo.getText().toString();
-        Boolean zonaExistente = detectar(nuevaZona);
-
-        if (zonaExistente){
-            Toast toast = Toast.makeText(getApplicationContext(),"Zona existente", Toast.LENGTH_SHORT);
+    public void buscarZona (View view){
+        nombre.setText("");
+        if (validacion("paso",codigo.getText().toString())){
+            Toast toast = Toast.makeText(getApplicationContext(),"Error, no dejar campos vacios", Toast.LENGTH_SHORT);
             toast.show();
         }else {
-            zonas.child(nuevoCodigo).setValue(nuevaZona);
-            Toast toast = Toast.makeText(getApplicationContext(),"Zona agregada", Toast.LENGTH_SHORT);
+            for (int i = 0; i < CODIGO.length; i++){
+                if (codigo.getText().toString().toUpperCase().equals(CODIGO[i])){
+                    nombre.setText(ZONAS[i]);
+                    break;
+                }else{
+                    Toast toast = Toast.makeText(getApplicationContext(),"Zona no existente", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+        }
+
+    }
+
+    public void agregarZona(View view){
+        if(validacion(nombre.getText().toString(), codigo.getText().toString())){
+            Toast toast = Toast.makeText(getApplicationContext(),"Error, no dejar campos vacios", Toast.LENGTH_SHORT);
             toast.show();
+        }else{
+            String nuevaZona = nombre.getText().toString();
+            final String nuevoCodigo = codigo.getText().toString().toUpperCase();
+            Boolean zonaExistente = detectar(nuevaZona);
+
+            if (zonaExistente){
+                Toast toast = Toast.makeText(getApplicationContext(),"Zona existente", Toast.LENGTH_SHORT);
+                toast.show();
+            }else {
+                zonas.child(nuevoCodigo).setValue(nuevaZona);
+                Toast toast = Toast.makeText(getApplicationContext(),"Zona agregada", Toast.LENGTH_SHORT);
+                toast.show();
+                limpiarCampos();
+            }
         }
     }
 
-    public void EliminarZona(View view){
-        String eliminarZona = nombre.getText().toString();
-        String eliminarCodigo = codigo.getText().toString();
-        Boolean zonaExistente = detectar(eliminarZona);
+    public void eliminarZona(View view){
+        if(validacion(nombre.getText().toString(), codigo.getText().toString())){
+            Toast toast = Toast.makeText(getApplicationContext(),"Error, no dejar campos vacios", Toast.LENGTH_SHORT);
+            toast.show();
+        }else{
+            String eliminarZona = nombre.getText().toString();
+            String eliminarCodigo = codigo.getText().toString().toUpperCase();
+            Boolean zonaExistente = detectar(eliminarZona);
 
-        if (zonaExistente){
-            zonas.child(eliminarCodigo).removeValue();
-            Toast toast = Toast.makeText(getApplicationContext(),"Zona eliminada", Toast.LENGTH_SHORT);
-            toast.show();
-        }else {
-            Toast toast = Toast.makeText(getApplicationContext(),"Zona no existente", Toast.LENGTH_SHORT);
-            toast.show();
+            if (zonaExistente){
+                zonas.child(eliminarCodigo).removeValue();
+                Toast toast = Toast.makeText(getApplicationContext(),"Zona eliminada", Toast.LENGTH_SHORT);
+                toast.show();
+                limpiarCampos();
+            }else {
+                Toast toast = Toast.makeText(getApplicationContext(),"Zona no existente", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
 
     }
@@ -131,5 +157,19 @@ public class mant_zona extends AppCompatActivity {
             }
         }
         return bandera;
+    }
+
+    private Boolean validacion(String nm, String cd){
+        if (nm.equals("") || cd.equals("")){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private void limpiarCampos() {
+        nombre.setText("");
+        codigo.setText("");
+        listaZonas.setText("");
     }
 }
