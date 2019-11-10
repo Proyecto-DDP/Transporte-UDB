@@ -38,6 +38,7 @@
             android:layout_marginEnd="48dp"
             android:src="@drawable/ic_help"
             android:background="@color/colorPrimary"
+            android:onClick="ShowPopup"
             />
         <ImageButton
             android:id="@+id/closed_session"
