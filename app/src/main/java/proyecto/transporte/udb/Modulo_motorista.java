@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -37,6 +38,7 @@ public class Modulo_motorista extends AppCompatActivity {
     private ImageView FotoMotorista;
     private TextView UnidadRuta;
     public  String Unidad, UserName;
+    private boolean banderaDesperfecto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,24 @@ public class Modulo_motorista extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Para evitar que se bloquee el cel se destruye el servicio
+        Intent i = new Intent(getApplicationContext(), GPS_Service.class);
+        stopService(i);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //Para evitar que se bloquee el cel se destruye el servicio
+        Intent i = new Intent(getApplicationContext(), GPS_Service.class);
+        stopService(i);
+    }
+
+
     //Activa los botones
     public void enable_buttons() {
         IniciarTransmision(iniciar);
@@ -90,6 +110,7 @@ public class Modulo_motorista extends AppCompatActivity {
         Intent i = new Intent(this, GPS_Service.class);
         stopService(i);
         referencia.child("Unidades").child(Unidad).child("Estado").setValue("Desperfectos mecanicos");
+        banderaDesperfecto = true;
     }
 
     //Metodo para el boton de finalizar transmision
@@ -97,6 +118,7 @@ public class Modulo_motorista extends AppCompatActivity {
         Intent i = new Intent(this, GPS_Service.class);
         stopService(i);
         referencia.child("Unidades").child(Unidad).child("Estado").setValue("Fuera de viaje");
+        banderaDesperfecto = false;
     }
 
     //Metodo para el boton de iniciar transmision
@@ -104,6 +126,7 @@ public class Modulo_motorista extends AppCompatActivity {
         Intent i = new Intent(this, GPS_Service.class);
         startService(i);
         referencia.child("Unidades").child(Unidad).child("Estado").setValue("Realizando viaje");
+        banderaDesperfecto = false;
     }
 
     //Metodo para obtener Unidad:
@@ -149,7 +172,7 @@ public class Modulo_motorista extends AppCompatActivity {
     //Este método revisa si los permisos necesarios para acceder a la ubicacion se encuentran aceptados, sino solicita acepatarlos
     private boolean runtime_permissions() {
         if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION},100);
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION, Manifest.permission.WAKE_LOCK},100);
             return true;
         }
         return false;
@@ -188,7 +211,16 @@ public class Modulo_motorista extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 PreferenceUtils.Clear(Modulo_motorista.this);
-                FinalizarTransmision(finalizar);
+
+                if (banderaDesperfecto){
+                    //Finaliza la transmisión
+                    Intent i = new Intent(getApplicationContext(), GPS_Service.class);
+                    stopService(i);
+                }else{
+                    FinalizarTransmision(finalizar);
+                }
+
+
                 Modulo_motorista.super.onBackPressed();
             }
         });

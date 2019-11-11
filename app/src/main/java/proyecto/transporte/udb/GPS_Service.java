@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import proyecto.transporte.udb.keepLogin.PreferenceUtils;
+import android.os.PowerManager;
 
 public class GPS_Service extends Service {
     @Nullable
@@ -36,11 +37,18 @@ public class GPS_Service extends Service {
     private LocationManager locationManager;
     private String motorista;
     private String placa;
+    private PowerManager.WakeLock wl;
 
     @SuppressLint("MissingPermission")
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //Evita que se bloquee el cel
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK,"PANTALLA: ENCENDIDA");
+        wl.acquire();
+
         database = FirebaseDatabase.getInstance();
         unidades = database.getReference("Unidades");
         usuarios = database.getReference("Usuarios");
@@ -104,6 +112,8 @@ public class GPS_Service extends Service {
         if(locationManager != null){
             locationManager.removeUpdates(listener);
         }
-    }
 
+        //Reactiva el bloqueo del cel
+        wl.release();
+    }
 }

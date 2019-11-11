@@ -58,6 +58,7 @@ public class show_info extends AppCompatActivity {
         final ImageView imagenUnidad = (ImageView) findViewById(R.id.imagenUnidad);
         final TextView txtNombreMotorista = (TextView) findViewById(R.id.txtNombreMotorista);
         final TextView txtTelefonoMotorista = (TextView) findViewById(R.id.txtTelefonoMotorista);
+        final TextView txtEstado = (TextView) findViewById(R.id.estado);
 
         //obteniendo placa
         Bundle extras = getIntent().getExtras();
@@ -102,6 +103,7 @@ public class show_info extends AppCompatActivity {
                 entradasProvicional = dataSnapshot.child(placa).child("Itinerario").child("Entrada").getValue(String.class);
                 salidasProvicional = dataSnapshot.child(placa).child("Itinerario").child("Salida").getValue(String.class);
                 llenadoItinerario(entradasProvicional,salidasProvicional);
+                txtEstado.setText(dataSnapshot.child(placa).child("Estado").getValue(String.class));
             }
 
             @Override
