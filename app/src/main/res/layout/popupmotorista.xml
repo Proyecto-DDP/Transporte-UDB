@@ -5,8 +5,8 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="320dp"
-        android:layout_height="250dp"
+        android:layout_width="300dp"
+        android:layout_height="485dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:background="@color/White"
@@ -21,12 +21,13 @@
             android:text="X"
             android:textColor="@color/dark_grey"
             android:layout_gravity="end"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:text="@string/Popup_title"
+            android:text="@string/Popup_title2"
             android:textColor="@color/black"
             android:textSize="24dp"
             android:textStyle="bold" />
@@ -40,40 +41,60 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="1000dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/boton1" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_centerInParent = "true"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="16dp"
-                android:drawableLeft="@drawable/greensquare"
                 android:drawablePadding="16dp"
-                android:text="@string/green"
-                android:layout_margin="8dp"
+                android:text="@string/Transmitir"
+                android:layout_margin="10dp"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
+            <ImageView
+                android:layout_width="1000dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/boton2" />
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_centerInParent = "true"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="8dp"
                 android:layout_marginStart="16dp"
-                android:drawableLeft="@drawable/yellowsquare"
+                android:layout_margin="8dp"
                 android:drawablePadding="16dp"
-                android:text="@string/yellow"
+                android:text="@string/Apagartrans"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
+            <ImageView
+                android:layout_width="1000dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/boton3" />
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent = "true"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="16dp"
                 android:layout_margin="8dp"
-                android:drawableLeft="@drawable/redsquare"
                 android:drawablePadding="16dp"
-                android:text="@string/red"
+                android:text="@string/Desperfectos"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -82,4 +103,3 @@
 
 
 </LinearLayout>
-
