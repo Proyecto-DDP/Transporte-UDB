@@ -78,7 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         usuario = mMap.addMarker(new MarkerOptions()
                 .position(sydney)
                 .title("Ubicación unidad")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.busicono))
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.busicono35))
         );
 
         //La camara se mueve a la ubicacion de sydney
