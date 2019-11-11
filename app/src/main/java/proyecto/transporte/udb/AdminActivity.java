@@ -20,7 +20,7 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        Toolbar toolbar = findViewById(R.id.toolbar_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -33,8 +33,7 @@ public class AdminActivity extends AppCompatActivity {
         });
 
         //Cambiando el título
-        View tt = findViewById(R.id.toolbar_main);
-        TextView title = (TextView) tt.findViewById(R.id.toolTitle);
+        TextView title = (TextView) toolbar.findViewById(R.id.toolTitle);
         title.setText("Pantalla de administrador");
     }
 
