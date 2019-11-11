@@ -45,7 +45,7 @@ public class routeAdapter extends RecyclerView.Adapter<routeAdapter.viewHolder> 
                 viewHolder.statusColor.setBackgroundColor(Color.parseColor("#00701a"));
                 break;
             case "Desperfectos mecanicos":
-                viewHolder.statusColor.setBackgroundColor(Color.parseColor("##FEDE40"));
+                viewHolder.statusColor.setBackgroundColor(Color.parseColor("#FEDE40"));
                 break;
             case "Fuera de viaje":
                 viewHolder.statusColor.setBackgroundColor(Color.parseColor("#FF2525"));
