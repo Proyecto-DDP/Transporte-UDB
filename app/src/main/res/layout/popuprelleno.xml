@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="320dp"
-        android:layout_height="250dp"
+        android:layout_height="310dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:background="@color/White"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:text="@string/Popup_title"
+            android:text="@string/Popup_title3"
             android:textColor="@color/black"
             android:textSize="24dp"
             android:textStyle="bold" />
@@ -46,9 +46,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="16dp"
-                android:drawableLeft="@drawable/greensquare"
+                android:drawableLeft="@drawable/punto"
                 android:drawablePadding="16dp"
-                android:text="@string/green"
+                android:text="@string/nombre1"
                 android:layout_margin="8dp"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -59,9 +59,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="8dp"
                 android:layout_marginStart="16dp"
-                android:drawableLeft="@drawable/yellowsquare"
+                android:drawableLeft="@drawable/punto"
                 android:drawablePadding="16dp"
-                android:text="@string/yellow"
+                android:text="@string/nombre2"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -71,15 +71,39 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="16dp"
                 android:layout_margin="8dp"
-                android:drawableLeft="@drawable/redsquare"
+                android:drawableLeft="@drawable/punto"
                 android:drawablePadding="16dp"
-                android:text="@string/red"
+                android:text="@string/nombre3"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="16dp"
+                android:layout_margin="8dp"
+                android:drawableLeft="@drawable/punto"
+                android:drawablePadding="16dp"
+                android:text="@string/nombre4"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="16dp"
+                android:layout_margin="8dp"
+                android:drawableLeft="@drawable/punto"
+                android:drawablePadding="16dp"
+                android:text="@string/nombre5"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
 
         </LinearLayout>
     </LinearLayout>
 
 
 </LinearLayout>
-

@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -45,6 +48,7 @@ public class Modulo_motorista extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Inicializacion de variables
+        myDialog = new Dialog(this);
         UserName = PreferenceUtils.getUser(this);
         database = FirebaseDatabase.getInstance();
         referencia = database.getReference();
@@ -244,5 +248,21 @@ public class Modulo_motorista extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    Dialog myDialog;
+    public void ShowPopup(View v) {
+        TextView Closetxt;
+        myDialog.setContentView(R.layout.popupmotorista);
+        Closetxt = (TextView) myDialog.findViewById(R.id.Closetxt);
+        Closetxt.setText("X");
+        Closetxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 }
