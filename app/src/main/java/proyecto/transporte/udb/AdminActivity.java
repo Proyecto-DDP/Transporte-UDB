@@ -4,8 +4,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -20,7 +23,9 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        Toolbar toolbar = findViewById(R.id.toolbar_main);
+        myDialog = new Dialog(this);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -33,8 +38,7 @@ public class AdminActivity extends AppCompatActivity {
         });
 
         //Cambiando el título
-        View tt = findViewById(R.id.toolbar_main);
-        TextView title = (TextView) tt.findViewById(R.id.toolTitle);
+        TextView title = (TextView) toolbar.findViewById(R.id.toolTitle);
         title.setText("Pantalla de administrador");
     }
 
@@ -96,5 +100,21 @@ public class AdminActivity extends AppCompatActivity {
         });
 
         builder.create().show();
+    }
+
+    Dialog myDialog;
+    public void ShowPopup(View v) {
+        TextView Closetxt;
+        myDialog.setContentView(R.layout.popuprelleno);
+        Closetxt = (TextView) myDialog.findViewById(R.id.Closetxt);
+        Closetxt.setText("X");
+        Closetxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 }

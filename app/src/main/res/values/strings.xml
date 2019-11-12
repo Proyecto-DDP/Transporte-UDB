@@ -18,4 +18,19 @@
     <string name="adminHeader">Pantalla de administrador</string>
     <string name="main">Pantalla principal</string>
     <string name="admin">Pantalla de administrador</string>
+    <string name="Popup_title">Significado de los colores</string>
+    <string name="red">Ruta fuera de servicio</string>
+    <string name="green">Ruta realizando viaje</string>
+    <string name="yellow">Ruta con desperfectos mecánicos</string>
+    <string name="Popup_title2">Como usar los botones</string>
+    <string name="Transmitir">Con este botón transmitirá en tiempo real la ubicación de su ruta</string>
+    <string name="Apagartrans">Con este botón dejará de transmitir la ubicación de su ruta, se recomienda apagarla al terminar sus viajes</string>
+    <string name="Desperfectos">Con este botón informará que su ruta posee desperfectos mecánicos por lo cual dejará de transmitir su ubicación</string>
+    <string name="Popup_title3">App desarrollada por</string>
+    <string name="nombre1">José Ricardo Majano</string>
+    <string name="nombre2">Diego Geovanny Trigueros</string>
+    <string name="nombre3">Oscar Alejandro Palacios</string>
+    <string name="nombre4">Oscar Guillermo Serpas</string>
+    <string name="nombre5">Ricardo José Espinal</string>
+
 </resources>
