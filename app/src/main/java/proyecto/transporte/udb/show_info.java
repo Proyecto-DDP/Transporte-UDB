@@ -93,7 +93,7 @@ public class show_info extends AppCompatActivity {
         });
 
         //Llenado de los elementos del layout
-        unidades.addValueEventListener(new ValueEventListener() {
+        unidades.addListenerForSingleValueEvent(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
 
         //Se obtiene la informacion del firebase de cada unidad y se es cargada en el recycler view
-        unidades.addValueEventListener(new ValueEventListener() {
+        unidades.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot placas : dataSnapshot.getChildren()) {
@@ -114,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     //***Salir*** (Cerrar sesion)
